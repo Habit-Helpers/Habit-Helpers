@@ -1,0 +1,9 @@
+<resources>
+    <string name="app_name">Habit-Helper</string>
+    <!-- TODO: Remove or change this placeholder text -->
+    <string name="hello_blank_fragment">Hello blank fragment</string>
+    <string name="reminders">Reminders</string>
+    <string name="activities">Activities</string>
+    <string name="home">Home</string>
+    <string name="insights">Insights\n</string>
+</resources>

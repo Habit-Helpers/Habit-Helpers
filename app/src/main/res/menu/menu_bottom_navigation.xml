@@ -1,0 +1,23 @@
+<?xml version="1.0" encoding="utf-8"?>
+<menu xmlns:android="http://schemas.android.com/apk/res/android">
+    <item
+        android:id="@+id/navigation_home"
+        android:title="@string/home"
+        android:icon="@drawable/outline_home_24" />
+
+    <item
+        android:id="@+id/navigation_activities"
+        android:title="@string/activities"
+        android:icon="@drawable/baseline_activity_outlined_24" />
+
+    <item
+        android:id="@+id/navigation_reminders"
+        android:title="@string/reminders"
+        android:icon="@drawable/baseline_format_reminder" />
+
+    <item
+        android:id="@+id/navigation_insights"
+        android:title="@string/insights"
+        android:icon="@drawable/baseline_insights_24" />
+
+</menu>
