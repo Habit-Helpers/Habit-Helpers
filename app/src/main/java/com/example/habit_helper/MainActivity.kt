@@ -1,8 +1,6 @@
 package com.example.habit_helper
 // MainActivity.kt
 
-// MainActivity.kt
-
 import android.os.Bundle
 import androidx.appcompat.app.AppCompatActivity
 import com.google.android.material.bottomnavigation.BottomNavigationView
