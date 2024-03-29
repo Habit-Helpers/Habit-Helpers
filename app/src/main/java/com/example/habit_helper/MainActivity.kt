@@ -2,7 +2,9 @@ package com.example.habit_helper
 // MainActivity.kt
 
 import android.os.Bundle
+import android.widget.Button
 import androidx.appcompat.app.AppCompatActivity
+import androidx.navigation.findNavController
 import com.google.android.material.bottomnavigation.BottomNavigationView
 
 class MainActivity : AppCompatActivity() {
@@ -11,27 +13,20 @@ class MainActivity : AppCompatActivity() {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_main)
 
-        val bottomNavigationView = findViewById<BottomNavigationView>(R.id.bottom_navigation)
-        bottomNavigationView.setOnItemSelectedListener { menuItem ->
-            when (menuItem.itemId) {
-                R.id.navigation_home -> {
-                    // Handle click on Home item
-                    true
-                }
-                R.id.navigation_activities -> {
-                    // Handle click on Activities item
-                    true
-                }
-                R.id.navigation_reminders -> {
-                    // Handle click on Reminders item
-                    true
-                }
-                R.id.navigation_insights -> {
-                    // Handle click on Insights item
-                    true
-                }
-                else -> false
-            }
+        // Optional: Handle button clicks
+        val loginButton = findViewById<Button>(R.id.button_login)
+        val signUpButton = findViewById<Button>(R.id.button_signup)
+
+        loginButton.setOnClickListener {
+            // Navigate to the login screen using the Navigation component
+            findNavController(R.id.nav_host_fragment).navigate(R.id.action_main_to_login)
+        }
+
+        signUpButton.setOnClickListener {
+            // Navigate to the sign-up screen using the Navigation component
+            findNavController(R.id.nav_host_fragment).navigate(R.id.action_main_to_signup)
         }
     }
+
+
 }
