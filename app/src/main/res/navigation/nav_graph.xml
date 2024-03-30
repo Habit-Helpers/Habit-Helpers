@@ -15,15 +15,25 @@
 
     <fragment
         android:id="@+id/loginFragment"
-        android:name="com.example.habit_helper.loginFragment"
-        android:label="fragment_login"
-        tools:layout="@layout/fragment_login" />
+        android:name="com.example.habit_helper.LoginFragment"
+        android:label="LoginFragment" />
 
     <fragment
         android:id="@+id/signupFragment"
-        android:name="com.example.habit_helper.signupFragment"
-        android:label="fragment_signup"
+        android:name="com.example.habit_helper.SignUpFragment"
+        android:label="SignUpFragment"
         tools:layout="@layout/fragment_signup" />
+
+    <fragment
+        android:id="@+id/homeFragment"
+        android:name="com.example.habit_helper.HomeFragment"
+        android:label="HomeFragment"
+        tools:layout="@layout/fragment_home" />
+
+
+    <action
+        android:id="@+id/action_signup_to_login"
+        app:destination="@id/loginFragment" />
 
     <action
         android:id="@+id/action_main_to_login"
@@ -32,4 +42,14 @@
     <action
         android:id="@+id/action_main_to_signup"
         app:destination="@id/signupFragment" />
+
+    <action
+        android:id="@+id/action_loginFragment_to_homeFragment"
+        app:destination="@id/homeFragment" />
+
+    <action
+        android:id="@+id/action_loginFragment_to_signUpFragment"
+        app:destination="@id/signupFragment" />
+
 </navigation>
+

@@ -26,4 +26,7 @@
     <string name="main_page_sign_up">Sign Up</string>
     <string name="habithelper">HabitHelper</string>
     <string name="Habithelper">Habit Helper</string>
+    <string name="home_welcome_back">Welcome Back!</string>
+    <string name="steps">Steps</string>
+    <string name="sleep">Sleep</string>
 </resources>

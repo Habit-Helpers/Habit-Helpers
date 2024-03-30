@@ -85,7 +85,7 @@
 
     <!-- Link to Login Page -->
     <TextView
-        android:id="@+id/text_already_have_account"
+        android:id="@+id/loginlink"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:text="@string/already_have_an_account_log_in"

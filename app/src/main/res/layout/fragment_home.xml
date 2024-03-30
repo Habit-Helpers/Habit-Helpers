@@ -1,12 +1,220 @@
 <?xml version="1.0" encoding="utf-8"?>
+<!-- fragment_home.xml -->
 <LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    android:orientation="vertical">
+    android:orientation="vertical"
+    android:padding="16dp">
 
-    <!-- Add UI elements for summary cards, quick action buttons, and navigation controls here -->
+    <!-- Header -->
+    <TextView
+        android:id="@+id/text_welcome"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="@string/home_welcome_back"
+        android:textSize="30sp"
+        android:textStyle="bold"
+        android:textColor="@color/black"
+        android:layout_gravity="center_horizontal"
+        android:layout_marginTop="16dp"
+        android:layout_marginBottom="16dp" />
+
+    <!-- Summary Cards -->
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:baselineAligned="false"
+        android:orientation="horizontal"
+        android:weightSum="2">
+
+        <!-- Daily Activities Summary Card -->
+        <LinearLayout
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:layout_marginEnd="20dp"
+            android:layout_marginStart="20dp"
+            android:layout_weight="1"
+            android:background="@color/blue"
+            android:clickable="true"
+            android:focusable="true"
+            android:onClick="onDailyActivitiesClick"
+            android:orientation="vertical"
+            android:padding="40dp">
+
+            <!-- Summary Title -->
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="@string/steps"
+                android:textColor="@color/black"
+                android:textSize="18sp"
+                android:textStyle="bold" />
+
+            <!-- Summary Data (e.g., number of completed activities) -->
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="500 steps"
+                android:textColor="@color/black"
+                android:textSize="14sp" />
+        </LinearLayout>
+
+        <LinearLayout
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:layout_marginEnd="20dp"
+            android:layout_weight="1"
+            android:background="@color/purple"
+            android:clickable="true"
+            android:focusable="true"
+            android:onClick="onDailyActivitiesClick"
+            android:orientation="vertical"
+            android:padding="40dp">
+
+            <!-- Summary Title -->
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="@string/sleep"
+                android:textColor="@color/black"
+                android:textSize="18sp"
+                android:textStyle="bold" />
+
+            <!-- Summary Data (e.g., number of completed activities) -->
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="8 hours"
+                android:textColor="@color/black"
+                android:textSize="14sp" />
+        </LinearLayout>
+        <!-- Other Summary Cards (e.g., Goals, Insights, etc.) -->
+        <!-- Add similar layouts for other summary cards -->
+    </LinearLayout>
+    <!-- Summary Cards for Additional Activities -->
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:orientation="horizontal"
+        android:weightSum="2"
+        android:layout_marginTop="16dp">
+
+        <!-- Summary Card 3 -->
+        <!-- Include the layout for the third summary card for daily activities -->
+        <LinearLayout
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:layout_marginEnd="20dp"
+            android:layout_marginStart="20dp"
+            android:layout_weight="1"
+            android:background="@color/blue"
+            android:clickable="true"
+            android:focusable="true"
+            android:onClick="onDailyActivitiesClick"
+            android:orientation="vertical"
+            android:padding="40dp">
+
+            <!-- Summary Title -->
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="@string/steps"
+                android:textColor="@color/black"
+                android:textSize="18sp"
+                android:textStyle="bold" />
+
+            <!-- Summary Data (e.g., number of completed activities) -->
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="2L"
+                android:textColor="@color/black"
+                android:textSize="14sp" />
+        </LinearLayout>
+
+        <LinearLayout
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:layout_marginEnd="20dp"
+            android:layout_weight="1"
+            android:background="@color/red"
+            android:clickable="true"
+            android:focusable="true"
+            android:onClick="onDailyActivitiesClick"
+            android:orientation="vertical"
+            android:padding="40dp">
+
+            <!-- Summary Title -->
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="calories"
+                android:textColor="@color/black"
+                android:textSize="18sp"
+                android:textStyle="bold" />
+
+            <!-- Summary Data (e.g., number of completed activities) -->
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="750 calories"
+                android:textColor="@color/black"
+                android:textSize="14sp" />
+        </LinearLayout>
 
 
+    </LinearLayout>
 
+    <TextView
+        android:layout_width="match_parent"
+        android:layout_marginTop="50dp"
+        android:text="Today's Goals"
+        android:textSize="25sp"
+        android:textStyle="bold"
+        android:layout_marginStart="20dp"
+        android:textColor="@color/black"
+        android:layout_height="wrap_content"
+        />
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:orientation="horizontal"
+        android:weightSum="2"
+        android:layout_marginTop="0dp">
+
+        <!-- Goal 1 Summary Card -->
+        <LinearLayout
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:layout_weight="1"
+            android:orientation="vertical"
+            android:layout_marginStart="20dp"
+            android:padding="16dp"
+            android:background="@drawable/card_background"
+            android:clickable="true"
+            android:onClick="onGoal1Click">
+
+            <!-- Summary Title -->
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="Goal 1"
+                android:textSize="18sp"
+                android:textStyle="bold" />
+
+            <!-- Summary Data (e.g., progress) -->
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="75% complete"
+                android:textSize="14sp" />
+        </LinearLayout>
+
+        <!-- Goal 2 Summary Card -->
+        <!-- Add similar layout for Goal 2 -->
+    </LinearLayout>
+
+    <!-- Add other Goal Summary Cards (e.g., Goal 2, Goal 3, Goal 4) -->
 
 </LinearLayout>

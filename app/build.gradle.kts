@@ -1,7 +1,9 @@
 plugins {
-    alias(libs.plugins.androidApplication)
-    alias(libs.plugins.jetbrainsKotlinAndroid)
+    id("com.android.application") // Android Gradle Plugin
+    id("kotlin-android") // Kotlin Android Extensions Plugin
+    id("kotlin-kapt") // Kotlin Kapt Plugin
 }
+
 
 android {
     namespace = "com.example.habit_helper"
@@ -47,4 +49,15 @@ dependencies {
     testImplementation(libs.junit)
     androidTestImplementation(libs.androidx.junit)
     androidTestImplementation(libs.androidx.espresso.core)
+    implementation("com.squareup.retrofit2:retrofit:2.9.0")
+    implementation("com.squareup.retrofit2:converter-gson:2.9.0")
+    implementation("androidx.room:room-runtime:2.4.0")
+
+    kapt("androidx.room:room-compiler:2.4.0")
+    implementation("org.jetbrains.kotlinx:kotlinx-coroutines-core:1.5.0")
+    implementation("org.jetbrains.kotlinx:kotlinx-coroutines-android:1.5.0")
+
+
+
+
 }

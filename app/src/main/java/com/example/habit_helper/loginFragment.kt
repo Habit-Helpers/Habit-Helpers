@@ -1,59 +1,58 @@
 package com.example.habit_helper
-
 import android.os.Bundle
-import androidx.fragment.app.Fragment
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
+import android.widget.Button
+import android.widget.EditText
+import android.widget.TextView
+import android.widget.Toast
+import androidx.fragment.app.Fragment
+import androidx.navigation.fragment.findNavController
 
-// TODO: Rename parameter arguments, choose names that match
-// the fragment initialization parameters, e.g. ARG_ITEM_NUMBER
-private const val ARG_PARAM1 = "param1"
-private const val ARG_PARAM2 = "param2"
-
-/**
- * A simple [Fragment] subclass.
- * Use the [loginFragment.newInstance] factory method to
- * create an instance of this fragment.
- */
-class loginFragment : Fragment() {
-    // TODO: Rename and change types of parameters
-    private var param1: String? = null
-    private var param2: String? = null
-
-    override fun onCreate(savedInstanceState: Bundle?) {
-        super.onCreate(savedInstanceState)
-        arguments?.let {
-            param1 = it.getString(ARG_PARAM1)
-            param2 = it.getString(ARG_PARAM2)
-        }
-    }
+class LoginFragment : Fragment() {
 
     override fun onCreateView(
-        inflater: LayoutInflater, container: ViewGroup?,
+        inflater: LayoutInflater,
+        container: ViewGroup?,
         savedInstanceState: Bundle?
     ): View? {
         // Inflate the layout for this fragment
         return inflater.inflate(R.layout.fragment_login, container, false)
     }
 
-    companion object {
-        /**
-         * Use this factory method to create a new instance of
-         * this fragment using the provided parameters.
-         *
-         * @param param1 Parameter 1.
-         * @param param2 Parameter 2.
-         * @return A new instance of fragment loginFragment.
-         */
-        // TODO: Rename and change types and number of parameters
-        @JvmStatic
-        fun newInstance(param1: String, param2: String) =
-            loginFragment().apply {
-                arguments = Bundle().apply {
-                    putString(ARG_PARAM1, param1)
-                    putString(ARG_PARAM2, param2)
-                }
+    override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
+        super.onViewCreated(view, savedInstanceState)
+
+        // Find views by their IDs
+        val editTextUsername = view.findViewById<EditText>(R.id.editTextUsername)
+        val editTextPassword = view.findViewById<EditText>(R.id.editTextPassword)
+        val buttonLogin = view.findViewById<Button>(R.id.buttonLogin)
+        val signUpLink = view.findViewById<TextView>(R.id.text_sign_up)
+
+        // Set click listener for login button
+        buttonLogin.setOnClickListener {
+            // Retrieve the username and password entered by the user
+            val username = editTextUsername.text.toString()
+            val password = editTextPassword.text.toString()
+
+            // Perform authentication (replace this with your actual authentication logic)
+            if (username.isNotEmpty() && password.isNotEmpty()) {
+                // Authentication successful, navigate to the home screen or perform other actions
+                // For now, let's navigate to a placeholder home screen
+                findNavController().navigate(R.id.action_loginFragment_to_homeFragment)
+            } else {
+                // Show an error message indicating that username or password is empty
+                Toast.makeText(requireContext(), "Please enter username and password", Toast.LENGTH_SHORT).show()
             }
+        }
+
+        // Set click listener for sign up link
+        signUpLink.setOnClickListener {
+            // Navigate to the sign-up fragment
+            findNavController().navigate(R.id.action_loginFragment_to_signUpFragment)
+        }
+
     }
 }
+
