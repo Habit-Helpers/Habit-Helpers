@@ -51,5 +51,9 @@
         android:id="@+id/action_loginFragment_to_signUpFragment"
         app:destination="@id/signupFragment" />
 
+    <action
+        android:id="@+id/action_signup_to_home"
+        app:destination="@id/homeFragment" />
+
 </navigation>
 

@@ -29,4 +29,7 @@
     <string name="home_welcome_back">Welcome Back!</string>
     <string name="steps">Steps</string>
     <string name="sleep">Sleep</string>
+    <string name="today_s_goals">Today\'s Goals</string>
+    <string name="water">Water</string>
+    <string name="calories">Calories</string>
 </resources>

@@ -1,220 +1,225 @@
 <?xml version="1.0" encoding="utf-8"?>
 <!-- fragment_home.xml -->
-<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+<androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:id="@+id/linearLayout"
     android:layout_width="match_parent"
-    android:layout_height="match_parent"
-    android:orientation="vertical"
-    android:padding="16dp">
+    android:layout_height="match_parent">
 
     <!-- Header -->
     <TextView
         android:id="@+id/text_welcome"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
+        android:layout_marginStart="66dp"
+        android:layout_marginLeft="66dp"
+        android:layout_marginTop="48dp"
+        android:layout_marginEnd="66dp"
+        android:layout_marginRight="66dp"
+        android:layout_marginBottom="16dp"
         android:text="@string/home_welcome_back"
+        android:textColor="@color/black"
         android:textSize="30sp"
         android:textStyle="bold"
-        android:textColor="@color/black"
-        android:layout_gravity="center_horizontal"
-        android:layout_marginTop="16dp"
-        android:layout_marginBottom="16dp" />
+        app:layout_constraintBottom_toTopOf="@+id/linearLayout3"
+        app:layout_constraintEnd_toEndOf="@+id/linearLayout3"
+        app:layout_constraintStart_toStartOf="@+id/linearLayout2"
+        app:layout_constraintTop_toTopOf="parent" />
 
     <!-- Summary Cards -->
+
+
+    <!-- Daily Activities Summary Card -->
     <LinearLayout
-        android:layout_width="match_parent"
+        android:id="@+id/linearLayout2"
+        android:layout_width="0dp"
         android:layout_height="wrap_content"
-        android:baselineAligned="false"
-        android:orientation="horizontal"
-        android:weightSum="2">
+        android:layout_marginStart="40dp"
+        android:layout_marginTop="17dp"
+        android:layout_marginEnd="20dp"
+        android:background="@color/blue"
+        android:clickable="true"
+        android:focusable="true"
+        android:onClick="onDailyActivitiesClick"
+        android:orientation="vertical"
+        android:padding="40dp"
+        app:layout_constraintEnd_toStartOf="@+id/linearLayout3"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/text_welcome">
 
-        <!-- Daily Activities Summary Card -->
-        <LinearLayout
-            android:layout_width="0dp"
+        <!-- Summary Title -->
+        <TextView
+            android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:layout_marginEnd="20dp"
-            android:layout_marginStart="20dp"
-            android:layout_weight="1"
-            android:background="@color/blue"
-            android:clickable="true"
-            android:focusable="true"
-            android:onClick="onDailyActivitiesClick"
-            android:orientation="vertical"
-            android:padding="40dp">
+            android:text="@string/steps"
+            android:textColor="@color/black"
+            android:textSize="18sp"
+            android:textStyle="bold" />
 
-            <!-- Summary Title -->
-            <TextView
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:text="@string/steps"
-                android:textColor="@color/black"
-                android:textSize="18sp"
-                android:textStyle="bold" />
-
-            <!-- Summary Data (e.g., number of completed activities) -->
-            <TextView
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:text="500 steps"
-                android:textColor="@color/black"
-                android:textSize="14sp" />
-        </LinearLayout>
-
-        <LinearLayout
-            android:layout_width="0dp"
+        <!-- Summary Data (e.g., number of completed activities) -->
+        <TextView
+            android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:layout_marginEnd="20dp"
-            android:layout_weight="1"
-            android:background="@color/purple"
-            android:clickable="true"
-            android:focusable="true"
-            android:onClick="onDailyActivitiesClick"
-            android:orientation="vertical"
-            android:padding="40dp">
-
-            <!-- Summary Title -->
-            <TextView
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:text="@string/sleep"
-                android:textColor="@color/black"
-                android:textSize="18sp"
-                android:textStyle="bold" />
-
-            <!-- Summary Data (e.g., number of completed activities) -->
-            <TextView
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:text="8 hours"
-                android:textColor="@color/black"
-                android:textSize="14sp" />
-        </LinearLayout>
-        <!-- Other Summary Cards (e.g., Goals, Insights, etc.) -->
-        <!-- Add similar layouts for other summary cards -->
+            android:text="500 steps"
+            android:textColor="@color/black"
+            android:textSize="14sp" />
     </LinearLayout>
-    <!-- Summary Cards for Additional Activities -->
+
     <LinearLayout
-        android:layout_width="match_parent"
+        android:id="@+id/linearLayout3"
+        android:layout_width="0dp"
         android:layout_height="wrap_content"
-        android:orientation="horizontal"
-        android:weightSum="2"
-        android:layout_marginTop="16dp">
+        android:layout_marginEnd="40dp"
+        android:layout_marginBottom="17dp"
+        android:background="@color/purple"
+        android:clickable="true"
+        android:focusable="true"
+        android:onClick="onDailyActivitiesClick"
+        android:orientation="vertical"
+        android:padding="40dp"
+        app:layout_constraintBottom_toTopOf="@+id/linearLayout5"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toEndOf="@+id/linearLayout2"
+        app:layout_constraintTop_toBottomOf="@+id/text_welcome">
 
-        <!-- Summary Card 3 -->
-        <!-- Include the layout for the third summary card for daily activities -->
-        <LinearLayout
-            android:layout_width="0dp"
+        <!-- Summary Title -->
+        <TextView
+            android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:layout_marginEnd="20dp"
-            android:layout_marginStart="20dp"
-            android:layout_weight="1"
-            android:background="@color/blue"
-            android:clickable="true"
-            android:focusable="true"
-            android:onClick="onDailyActivitiesClick"
-            android:orientation="vertical"
-            android:padding="40dp">
+            android:text="@string/sleep"
+            android:textColor="@color/black"
+            android:textSize="18sp"
+            android:textStyle="bold" />
 
-            <!-- Summary Title -->
-            <TextView
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:text="@string/steps"
-                android:textColor="@color/black"
-                android:textSize="18sp"
-                android:textStyle="bold" />
-
-            <!-- Summary Data (e.g., number of completed activities) -->
-            <TextView
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:text="2L"
-                android:textColor="@color/black"
-                android:textSize="14sp" />
-        </LinearLayout>
-
-        <LinearLayout
-            android:layout_width="0dp"
+        <!-- Summary Data (e.g., number of completed activities) -->
+        <TextView
+            android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:layout_marginEnd="20dp"
-            android:layout_weight="1"
-            android:background="@color/red"
-            android:clickable="true"
-            android:focusable="true"
-            android:onClick="onDailyActivitiesClick"
-            android:orientation="vertical"
-            android:padding="40dp">
-
-            <!-- Summary Title -->
-            <TextView
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:text="calories"
-                android:textColor="@color/black"
-                android:textSize="18sp"
-                android:textStyle="bold" />
-
-            <!-- Summary Data (e.g., number of completed activities) -->
-            <TextView
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:text="750 calories"
-                android:textColor="@color/black"
-                android:textSize="14sp" />
-        </LinearLayout>
-
-
+            android:text="8 hours"
+            android:textColor="@color/black"
+            android:textSize="14sp" />
     </LinearLayout>
+
+
+    <!-- Summary Card 3 -->
+    <!-- Include the layout for the third summary card for daily activities -->
+    <LinearLayout
+        android:id="@+id/linearLayout4"
+        android:layout_width="0dp"
+        android:layout_height="wrap_content"
+        android:layout_marginStart="40dp"
+        android:layout_marginTop="17dp"
+        android:layout_marginEnd="20dp"
+        android:background="@color/blue"
+        android:clickable="true"
+        android:focusable="true"
+        android:onClick="onDailyActivitiesClick"
+        android:orientation="vertical"
+        android:padding="40dp"
+        app:layout_constraintEnd_toStartOf="@+id/linearLayout5"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/linearLayout2">
+
+        <!-- Summary Title -->
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="@string/water"
+            android:textColor="@color/black"
+            android:textSize="18sp"
+            android:textStyle="bold" />
+
+        <!-- Summary Data (e.g., number of completed activities) -->
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="2L"
+            android:textColor="@color/black"
+            android:textSize="14sp" />
+    </LinearLayout>
+
+    <LinearLayout
+        android:id="@+id/linearLayout5"
+        android:layout_width="145dp"
+        android:layout_height="125dp"
+        android:layout_marginEnd="40dp"
+        android:layout_marginBottom="50dp"
+        android:background="@color/red"
+        android:clickable="true"
+        android:focusable="true"
+        android:onClick="onDailyActivitiesClick"
+        android:orientation="vertical"
+        android:padding="40dp"
+        app:layout_constraintBottom_toTopOf="@+id/textView"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toEndOf="@+id/linearLayout4"
+        app:layout_constraintTop_toBottomOf="@+id/linearLayout3">
+
+        <!-- Summary Title -->
+        <TextView
+            android:layout_width="76dp"
+            android:layout_height="wrap_content"
+            android:text="@string/calories"
+            android:textColor="@color/black"
+            android:textSize="18sp"
+            android:textStyle="bold" />
+
+        <!-- Summary Data (e.g., number of completed activities) -->
+        <TextView
+            android:layout_width="66dp"
+            android:layout_height="wrap_content"
+            android:text="750 calories"
+            android:textColor="@color/black"
+            android:textSize="14sp" />
+    </LinearLayout>
+
 
     <TextView
-        android:layout_width="match_parent"
-        android:layout_marginTop="50dp"
-        android:text="Today's Goals"
+        android:id="@+id/textView"
+        android:layout_width="0dp"
+        android:layout_height="wrap_content"
+        android:layout_marginStart="40dp"
+        android:layout_marginEnd="40dp"
+        android:text="@string/today_s_goals"
+        android:textColor="@color/black"
         android:textSize="25sp"
         android:textStyle="bold"
-        android:layout_marginStart="20dp"
-        android:textColor="@color/black"
-        android:layout_height="wrap_content"
-        />
+        app:layout_constraintBottom_toTopOf="@+id/recyclerViewGoals"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.0"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/linearLayout5" />
 
-    <LinearLayout
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:orientation="horizontal"
-        android:weightSum="2"
-        android:layout_marginTop="0dp">
+    <androidx.recyclerview.widget.RecyclerView
+        android:id="@+id/recyclerViewGoals"
+        android:layout_width="337dp"
+        android:layout_height="196dp"
+        android:layout_marginStart="40dp"
+        android:layout_marginEnd="40dp"
+        android:layout_marginBottom="15dp"
+        android:padding="0dp"
+        android:scrollbars="vertical"
+        app:layout_constraintBottom_toTopOf="@+id/bottom_navigation"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="@+id/bottom_navigation"
+        app:layout_constraintTop_toBottomOf="@+id/textView" />
 
-        <!-- Goal 1 Summary Card -->
-        <LinearLayout
-            android:layout_width="0dp"
-            android:layout_height="wrap_content"
-            android:layout_weight="1"
-            android:orientation="vertical"
-            android:layout_marginStart="20dp"
-            android:padding="16dp"
-            android:background="@drawable/card_background"
-            android:clickable="true"
-            android:onClick="onGoal1Click">
+    <com.google.android.material.bottomnavigation.BottomNavigationView
+        android:id="@+id/bottom_navigation"
+        android:layout_width="wrap_content"
+        android:layout_height="70dp"
+        android:background="@color/green"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/recyclerViewGoals"
+        app:menu="@menu/menu_bottom_navigation" />
 
-            <!-- Summary Title -->
-            <TextView
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:text="Goal 1"
-                android:textSize="18sp"
-                android:textStyle="bold" />
 
-            <!-- Summary Data (e.g., progress) -->
-            <TextView
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:text="75% complete"
-                android:textSize="14sp" />
-        </LinearLayout>
+</androidx.constraintlayout.widget.ConstraintLayout>
 
-        <!-- Goal 2 Summary Card -->
-        <!-- Add similar layout for Goal 2 -->
-    </LinearLayout>
+
+
 
     <!-- Add other Goal Summary Cards (e.g., Goal 2, Goal 3, Goal 4) -->
 
-</LinearLayout>

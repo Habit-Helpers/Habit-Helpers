@@ -7,6 +7,7 @@ import android.view.ViewGroup
 import android.widget.Button
 import android.widget.EditText
 import android.widget.TextView
+import android.widget.Toast
 import androidx.fragment.app.Fragment
 import androidx.navigation.fragment.findNavController
 
@@ -38,18 +39,18 @@ class SignUpFragment : Fragment() {
 
             if (username.isEmpty() || email.isEmpty() || password.isEmpty() || confirmPassword.isEmpty()) {
                 // Display an error message indicating that all fields are required
-                // You can show a Toast message or update a TextView with an error message
+                Toast.makeText(requireContext(), "All fields are required", Toast.LENGTH_SHORT).show()
                 return@setOnClickListener
             }
 
             if (password != confirmPassword) {
                 // Display an error message indicating that passwords do not match
-                // You can show a Toast message or update a TextView with an error message
+                Toast.makeText(requireContext(), "Passwords do not match", Toast.LENGTH_SHORT).show()
                 return@setOnClickListener
             }
 
-            // Perform sign-up logic here (e.g., send data to backend or save to local database)
             performSignUp(username, email, password)
+
         }
 
         textLoginLink.setOnClickListener {
@@ -58,9 +59,6 @@ class SignUpFragment : Fragment() {
     }
 
     private fun performSignUp(username: String, email: String, password: String) {
-        // Here you can put the code for sending sign-up data to the backend or saving locally
-        // For example, using Retrofit for sending data to a backend server or Room for local database
-
         val dbHelper = MyDBHelper(requireContext().applicationContext)
         val db = dbHelper.writableDatabase
 
@@ -69,6 +67,7 @@ class SignUpFragment : Fragment() {
             val cursor = db.rawQuery("SELECT * FROM users WHERE username = ? OR email = ?", arrayOf(username, email))
             if (cursor.count > 0) {
                 // User already exists, handle accordingly (e.g., show error message)
+                Toast.makeText(requireContext(), "User already exists", Toast.LENGTH_SHORT).show()
                 cursor.close()
                 return
             }
@@ -83,14 +82,19 @@ class SignUpFragment : Fragment() {
             db.insert("users", null, values)
 
             // Handle successful signup (e.g., navigate to the home screen)
+            Toast.makeText(requireContext(), "Sign up successful", Toast.LENGTH_SHORT).show()
+            findNavController().navigate(R.id.action_signup_to_home)
         } catch (e: Exception) {
             // Handle exceptions (e.g., database errors)
+            Toast.makeText(requireContext(), "Sign up failed", Toast.LENGTH_SHORT).show()
         } finally {
             db.close()
         }
     }
 
-
-
-
 }
+
+
+
+
+
