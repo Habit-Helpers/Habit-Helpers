@@ -5,49 +5,42 @@ import android.os.Bundle
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
+import androidx.appcompat.app.AppCompatActivity
+import androidx.appcompat.widget.Toolbar
 import androidx.fragment.app.Fragment
-import com.google.android.material.bottomnavigation.BottomNavigationView
+import androidx.navigation.fragment.findNavController
+import androidx.navigation.ui.AppBarConfiguration
+import androidx.navigation.ui.setupWithNavController
 
 class HomeFragment : Fragment() {
-
-    private lateinit var bottomNavigationView: BottomNavigationView
 
     override fun onCreateView(
         inflater: LayoutInflater,
         container: ViewGroup?,
         savedInstanceState: Bundle?
     ): View? {
+        // Inflate the layout for this fragment
         return inflater.inflate(R.layout.fragment_home, container, false)
     }
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
 
-        // Initialize BottomNavigationView
-        bottomNavigationView = view.findViewById(R.id.bottom_navigation)
+        // Find the toolbar in the activity layout
+        val toolbar = requireActivity().findViewById<Toolbar>(R.id.toolbar)
 
-        // Set item selected listener
-        bottomNavigationView.setOnItemSelectedListener { menuItem ->
-            when (menuItem.itemId) {
-                R.id.navigation_home -> {
-                    // Handle click on Home item
-                    true
-                }
-                R.id.navigation_activities -> {
-                    // Handle click on Activities item
-                    true
-                }
-                R.id.navigation_reminders -> {
-                    // Handle click on Reminders item
-                    true
-                }
-                R.id.navigation_insights -> {
-                    // Handle click on Insights item
-                    true
-                }
-                else -> false
-            }
-        }
+        // Set the toolbar as the support action bar
+        (requireActivity() as AppCompatActivity).setSupportActionBar(toolbar)
+
+        // Set the title of the action bar
+        (requireActivity() as AppCompatActivity).supportActionBar?.title = "Your Dashboard"
+
+        // Set up the Navigation Controller with the toolbar
+        val navController = findNavController()
+        val appBarConfiguration = AppBarConfiguration(navController.graph)
+        toolbar.setupWithNavController(navController, appBarConfiguration)
     }
 }
+
+
 

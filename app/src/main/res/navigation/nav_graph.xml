@@ -1,5 +1,4 @@
 <?xml version="1.0" encoding="utf-8"?>
-
 <!-- nav_graph.xml -->
 <navigation xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
@@ -27,7 +26,7 @@
     <fragment
         android:id="@+id/homeFragment"
         android:name="com.example.habit_helper.HomeFragment"
-        android:label="HomeFragment"
+        android:label="Your Dashboard"
         tools:layout="@layout/fragment_home" />
 
 
@@ -54,6 +53,9 @@
     <action
         android:id="@+id/action_signup_to_home"
         app:destination="@id/homeFragment" />
+
+
+
 
 </navigation>
 

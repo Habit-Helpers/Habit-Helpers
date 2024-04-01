@@ -32,4 +32,7 @@
     <string name="today_s_goals">Today\'s Goals</string>
     <string name="water">Water</string>
     <string name="calories">Calories</string>
+    <string name="add_new_activity">Add New Activity</string>
+    <string name="no_activities_to_display">No activities to display</string>
+    <string name="your_activities">Your Activities:</string>
 </resources>
