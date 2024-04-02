@@ -66,5 +66,8 @@
         android:text="@string/no_activities_to_display"
         android:gravity="center"
         android:visibility="gone" />
+
+    <include layout="@layout/fragment_bottom_nav" />
+
 </LinearLayout>
 

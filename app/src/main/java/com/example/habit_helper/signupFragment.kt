@@ -1,5 +1,6 @@
 package com.example.habit_helper
-import android.content.ContentValues
+
+
 import android.os.Bundle
 import android.view.LayoutInflater
 import android.view.View
@@ -64,26 +65,23 @@ class SignUpFragment : Fragment() {
 
         try {
             // Check if user already exists
-            val cursor = db.rawQuery("SELECT * FROM users WHERE username = ? OR email = ?", arrayOf(username, email))
-            if (cursor.count > 0) {
+            val userExists = dbHelper.checkUser(email)
+            if (userExists) {
                 // User already exists, handle accordingly (e.g., show error message)
                 Toast.makeText(requireContext(), "User already exists", Toast.LENGTH_SHORT).show()
-                cursor.close()
                 return
             }
-            cursor.close()
 
-            // Insert new user into the database
-            val values = ContentValues().apply {
-                put("username", username)
-                put("email", email)
-                put("password", password)
+            // Add new user to the database
+            val result = dbHelper.addUser(username, email, password)
+            if (result != -1L) {
+                // Handle successful signup (e.g., navigate to the home screen)
+                Toast.makeText(requireContext(), "Sign up successful", Toast.LENGTH_SHORT).show()
+                findNavController().navigate(R.id.action_signup_to_home)
+            } else {
+                // Handle unsuccessful signup
+                Toast.makeText(requireContext(), "Sign up failed", Toast.LENGTH_SHORT).show()
             }
-            db.insert("users", null, values)
-
-            // Handle successful signup (e.g., navigate to the home screen)
-            Toast.makeText(requireContext(), "Sign up successful", Toast.LENGTH_SHORT).show()
-            findNavController().navigate(R.id.action_signup_to_home)
         } catch (e: Exception) {
             // Handle exceptions (e.g., database errors)
             Toast.makeText(requireContext(), "Sign up failed", Toast.LENGTH_SHORT).show()
@@ -91,6 +89,7 @@ class SignUpFragment : Fragment() {
             db.close()
         }
     }
+
 
 }
 

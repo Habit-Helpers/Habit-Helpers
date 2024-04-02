@@ -29,12 +29,12 @@ class MainFragment : Fragment() {
         // Handle button clicks
         loginButton.setOnClickListener {
             // Navigate to the login screen using the Navigation component
-            findNavController().navigate(R.id.action_main_to_login)
+            findNavController().navigate(R.id.action_mainFragment_to_loginFragment)
         }
 
         signUpButton.setOnClickListener {
             // Navigate to the sign-up screen using the Navigation component
-            findNavController().navigate(R.id.action_main_to_signup)
+            findNavController().navigate(R.id.action_mainFragment_to_signupFragment)
         }
     }
 }

@@ -215,7 +215,8 @@
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/textView" />
 
-
+    <!-- Include the bottom navigation view -->
+    <include layout="@layout/fragment_bottom_nav" />
 
 
 </androidx.constraintlayout.widget.ConstraintLayout>
