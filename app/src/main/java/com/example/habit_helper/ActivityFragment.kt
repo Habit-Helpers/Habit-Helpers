@@ -7,10 +7,7 @@ import android.view.ViewGroup
 import android.widget.Button
 import android.widget.TextView
 import androidx.fragment.app.Fragment
-import androidx.navigation.fragment.findNavController
-import androidx.navigation.ui.setupWithNavController
 import androidx.recyclerview.widget.RecyclerView
-import com.google.android.material.bottomnavigation.BottomNavigationView
 
 class ActivityFragment : Fragment() {
 
@@ -40,15 +37,6 @@ class ActivityFragment : Fragment() {
             // You can replace 'YourFragmentToAddActivity' with the fragment you want to navigate to
             // findNavController().navigate(R.id.action_activityFragment_to_AddActivity)
         }
-
-        // Setup BottomNavigationView
-        val bottomNavigationView = view.findViewById<BottomNavigationView>(R.id.bottom_navigation)
-        val navController = findNavController()
-        bottomNavigationView.setupWithNavController(navController)
-
-
-
-
 
 
     }

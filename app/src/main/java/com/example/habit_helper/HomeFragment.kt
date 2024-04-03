@@ -8,11 +8,8 @@ import android.view.ViewGroup
 import android.widget.LinearLayout
 import androidx.fragment.app.Fragment
 import androidx.navigation.fragment.findNavController
-import com.google.android.material.bottomnavigation.BottomNavigationView
 
 class HomeFragment : Fragment() {
-
-    private lateinit var bottomNavigationView: BottomNavigationView
 
     override fun onCreateView(
         inflater: LayoutInflater,
@@ -20,25 +17,7 @@ class HomeFragment : Fragment() {
         savedInstanceState: Bundle?
     ): View? {
         // Inflate the layout for this fragment
-        val view = inflater.inflate(R.layout.fragment_home, container, false)
-
-        // Initialize the bottomNavigationView
-        bottomNavigationView = view.findViewById(R.id.bottom_navigation)
-
-        // Set the navigation item selected listener for the bottomNavigationView
-        bottomNavigationView.setOnNavigationItemSelectedListener { menuItem ->
-            when (menuItem.itemId) {
-                R.id.activitiesFragment -> {
-                    // Navigate to the ActivityFragment when the activity icon is clicked
-                    findNavController().navigate(R.id.action_homeFragment_to_activityFragment)
-                    true
-                }
-                // Add more cases for other menu items if needed
-                else -> false
-            }
-        }
-
-        return view
+        return inflater.inflate(R.layout.fragment_home, container, false)
     }
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
@@ -72,6 +51,8 @@ class HomeFragment : Fragment() {
     private fun navigateToActivityFragment() {
         // Use the Navigation component to navigate to the activity fragment
         findNavController().navigate(R.id.action_homeFragment_to_activityFragment)
-    }
-}
 
+        findNavController().navigate(R.id.activitiesFragment)
+    }
+
+}

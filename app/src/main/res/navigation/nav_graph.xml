@@ -30,6 +30,7 @@
         <action
             android:id="@+id/action_loginFragment_to_homeFragment"
             app:destination="@id/home_nav_graph" /> <!-- Updated destination -->
+
     </fragment>
 
     <fragment
@@ -66,6 +67,9 @@
                 android:id="@+id/action_homeFragment_to_activityFragment"
                 app:destination="@id/activitiesFragment" />
 
+            <action
+                android:id="@+id/action_homeFragment_to_activitiesFragment"
+                app:destination="@id/activitiesFragment" />
 
         </fragment>
 
@@ -76,9 +80,7 @@
             android:label="fragment_activities"
             tools:layout="@layout/fragment_activity" />
 
-        <action
-            android:id="@+id/action_homeFragment_to_activityFragment"
-            app:destination="@id/activitiesFragment" />
+
 
     </navigation>
 
