@@ -78,7 +78,36 @@
             android:id="@+id/activitiesFragment"
             android:name="com.example.habit_helper.ActivityFragment"
             android:label="fragment_activities"
-            tools:layout="@layout/fragment_activity" />
+            tools:layout="@layout/fragment_activity" >
+
+        <action
+            android:id="@+id/action_activityFragment_to_addActivityFragment"
+            app:destination="@id/addActivityFragment" />
+
+        </fragment>
+
+
+        <fragment
+            android:id="@+id/remindersFragment"
+            android:name="com.example.habit_helper.RemindersFragment"
+            android:label="fragment_reminders"
+            tools:layout="@layout/fragment_reminders" >
+
+        </fragment>
+
+        <fragment
+            android:id="@+id/insightsFragment"
+            android:name="com.example.habit_helper.InsightsFragment"
+            android:label="InsightsFragment">
+
+        </fragment>
+
+        <fragment
+            android:id="@+id/addActivityFragment"
+            android:name="com.example.habit_helper.AddActivityFragment"
+            android:label="fragment_add_activity"
+            tools:layout="@layout/fragment_add_activity" />
+
 
 
 

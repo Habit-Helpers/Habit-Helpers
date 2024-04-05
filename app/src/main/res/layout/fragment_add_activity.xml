@@ -1,0 +1,52 @@
+<?xml version="1.0" encoding="utf-8"?>
+<!-- fragment_add_activity.xml -->
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    android:orientation="vertical"
+    android:padding="16dp">
+
+    <androidx.appcompat.widget.Toolbar
+        android:id="@+id/toolbar"
+        android:layout_width="397dp"
+        android:layout_height="?attr/actionBarSize"
+        android:background="@color/green"
+        android:paddingBottom="0dp"
+        app:title="Add New Activity" />
+
+    <EditText
+        android:id="@+id/editTextActivityName"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:hint="@string/activity_name"
+        android:inputType="text"
+        android:minHeight="48dp"
+        android:layout_marginTop="20dp"/>
+
+    <EditText
+        android:id="@+id/editTextDescription"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:hint="@string/description"
+        android:inputType="textMultiLine"
+        android:minHeight="48dp" />
+
+    <!-- Spinner for selecting color label -->
+    <Spinner
+        android:id="@+id/spinnerColorLabel"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:minHeight="48dp"
+        android:prompt="@string/color_label_prompt" />
+
+    <!-- Add more EditText fields for other details of the activity if needed -->
+
+    <Button
+        android:id="@+id/buttonSaveActivity"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="@string/save"
+        android:layout_marginStart="300dp"/>
+
+</LinearLayout>

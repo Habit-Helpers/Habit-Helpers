@@ -25,7 +25,10 @@ class MainActivity : AppCompatActivity() {
         navController.addOnDestinationChangedListener { _, destination, _ ->
             when (destination.id) {
                 R.id.homeFragment,
-                R.id.activitiesFragment, -> showBottomNavigation()
+                R.id.activitiesFragment,
+                R.id.remindersFragment,
+                R.id.insightsFragment,
+                -> showBottomNavigation()
                 else -> hideBottomNavigation()
             }
         }
@@ -43,10 +46,17 @@ class MainActivity : AppCompatActivity() {
                     }
                     R.id.navigation_activities -> {
                         // Navigate to ActivitiesFragment
-                        navController.navigate(R.id.action_homeFragment_to_activitiesFragment)
+                        navController.navigate(R.id.activitiesFragment)
                         true
                     }
-
+                    R.id.navigation_reminders -> { // Add navigation for RemindersFragment
+                        navController.navigate(R.id.remindersFragment)
+                        true
+                    }
+                    R.id.navigation_insights -> { // Add navigation for RemindersFragment
+                        navController.navigate(R.id.insightsFragment)
+                        true
+                    }
                     else -> false
                 }
             } catch (e: Exception) {

@@ -50,6 +50,7 @@
     <!-- Button to Add New Activity -->
 
     <!-- Empty View -->
+
     <Button
         android:id="@+id/addActivityButton"
         android:layout_width="wrap_content"

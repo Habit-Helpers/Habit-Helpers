@@ -35,4 +35,11 @@
     <string name="add_new_activity">Add New Activity</string>
     <string name="no_activities_to_display">No activities to display</string>
     <string name="your_activities">Your Activities:</string>
+    <string name="task">Task: </string>
+    <string name="add_new">Add New</string>
+    <string name="activity_name">Activity Name</string>
+    <string name="description">Description</string>
+    <string name="save">Save</string>
+    <string name="color_label_prompt">Select Color Label</string>
+
 </resources>
