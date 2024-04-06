@@ -28,7 +28,7 @@ class MainActivity : AppCompatActivity() {
                 R.id.activitiesFragment,
                 R.id.remindersFragment,
                 R.id.insightsFragment,
-                -> showBottomNavigation()
+                R.id.settingsFragment, -> showBottomNavigation()
                 else -> hideBottomNavigation()
             }
         }
@@ -55,6 +55,10 @@ class MainActivity : AppCompatActivity() {
                     }
                     R.id.navigation_insights -> { // Add navigation for RemindersFragment
                         navController.navigate(R.id.insightsFragment)
+                        true
+                    }
+                    R.id.navigation_settings -> { // Add navigation for RemindersFragment
+                        navController.navigate(R.id.settingsFragment)
                         true
                     }
                     else -> false

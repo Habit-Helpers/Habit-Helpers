@@ -8,6 +8,7 @@ import android.widget.Button
 import android.widget.TextView
 import androidx.fragment.app.Fragment
 import androidx.navigation.fragment.findNavController
+import androidx.recyclerview.widget.LinearLayoutManager
 import androidx.recyclerview.widget.RecyclerView
 
 class ActivityFragment : Fragment() {
@@ -15,6 +16,9 @@ class ActivityFragment : Fragment() {
     private lateinit var recyclerViewGoals: RecyclerView
     private lateinit var addActivityButton: Button
     private lateinit var emptyView: TextView
+
+    // Example list of activities
+    private val activityList = mutableListOf<ActivityData>()
 
     override fun onCreateView(
         inflater: LayoutInflater,
@@ -31,6 +35,19 @@ class ActivityFragment : Fragment() {
         recyclerViewGoals = view.findViewById(R.id.recyclerViewGoals)
         addActivityButton = view.findViewById(R.id.addActivityButton)
         emptyView = view.findViewById(R.id.emptyView)
+
+        // Set up RecyclerView
+        val adapter = ActivityAdapter(activityList)
+        recyclerViewGoals.adapter = adapter
+        recyclerViewGoals.layoutManager = LinearLayoutManager(context)
+
+        // Observe navigation result from AddActivityFragment
+        findNavController().currentBackStackEntry?.savedStateHandle?.getLiveData<ActivityData>("activityData")?.observe(viewLifecycleOwner) { activityData ->
+            // Update dataset with new activity data
+            activityList.add(activityData)
+            // Notify adapter that the dataset has changed
+            adapter.notifyDataSetChanged()
+        }
 
         // Set up OnClickListener for addActivityButton
         addActivityButton.setOnClickListener {

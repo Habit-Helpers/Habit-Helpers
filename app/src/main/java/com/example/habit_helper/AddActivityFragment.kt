@@ -14,6 +14,7 @@ import androidx.navigation.fragment.findNavController
 class AddActivityFragment : Fragment() {
 
     private lateinit var editTextActivityName: EditText
+    private lateinit var editTextDescription: EditText
     private lateinit var spinnerColorLabel: Spinner
     private lateinit var buttonSaveActivity: Button
 
@@ -30,6 +31,7 @@ class AddActivityFragment : Fragment() {
 
         // Find views
         editTextActivityName = view.findViewById(R.id.editTextActivityName)
+        editTextDescription = view.findViewById(R.id.editTextDescription)
         spinnerColorLabel = view.findViewById(R.id.spinnerColorLabel)
         buttonSaveActivity = view.findViewById(R.id.buttonSaveActivity)
 
@@ -48,19 +50,17 @@ class AddActivityFragment : Fragment() {
 
     private fun saveActivity() {
         val activityName = editTextActivityName.text.toString().trim()
+        val activityDescription = editTextDescription.text.toString().trim()
         val selectedColor = spinnerColorLabel.selectedItem.toString()
 
-        // Add validation logic here if needed
+        // Create a bundle to hold the activity data
+        val bundle = Bundle().apply {
+            putString("activityName", activityName)
+            putString("activityDescription", activityDescription)
+            putString("selectedColor", selectedColor)
+        }
 
-        // Save the activity data or perform other actions
-        // You can implement the logic to save the activity data to a database or any other storage mechanism
-        // For now, you can just display a message indicating the activity was saved
-        val message = "Activity saved: $activityName, Color label: $selectedColor"
-        // For example, you can show a Toast message
-        // Toast.makeText(requireContext(), message, Toast.LENGTH_SHORT).show()
-
-        // Navigate back to the previous destination (activities screen)
-        findNavController().navigateUp()
+        // Navigate to the ActivitiesFragment and pass the bundle as arguments
+        findNavController().navigate(R.id.action_addActivityFragment_to_activitiesFragment, bundle)
     }
-
 }
