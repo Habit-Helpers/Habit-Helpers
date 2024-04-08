@@ -27,8 +27,5 @@ class ActivityAdapter(private var activityList: List<ActivityData>) : RecyclerVi
 
     override fun getItemCount() = activityList.size
 
-    fun updateData(newData: List<ActivityData>) {
-        activityList = newData
-        notifyDataSetChanged()
-    }
+
 }

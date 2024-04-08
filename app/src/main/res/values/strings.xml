@@ -55,5 +55,14 @@
     <string name="Activity_name">Activity Name</string>
     <string name="Activity_description">Activity Description</string>
     <string name="Color_label">Color Label</string>
+    <string name="task_name">Task Name</string>
+    <string name="task_date_yyyy_mm_dd">Task Date (YYYY-MM-DD)</string>
+    <string name="Tasksave">Save</string>
+    <string name="enter_description">Enter Description</string>
+    <string name="completed">Completed</string>
+    <string name="to_do">To Do</string>
+    <string name="in_progress">In Progress</string>
+    <string name="Goalsave">Save</string>
+    <string name="enter_goal_name">Enter Goal Name</string>
 
 </resources>

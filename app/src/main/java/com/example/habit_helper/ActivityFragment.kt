@@ -11,6 +11,7 @@ import androidx.navigation.fragment.findNavController
 import androidx.recyclerview.widget.LinearLayoutManager
 import androidx.recyclerview.widget.RecyclerView
 
+
 class ActivityFragment : Fragment() {
 
     private lateinit var recyclerViewGoals: RecyclerView
@@ -41,12 +42,15 @@ class ActivityFragment : Fragment() {
         recyclerViewGoals.adapter = adapter
         recyclerViewGoals.layoutManager = LinearLayoutManager(context)
 
+        // Set up line chart
+
         // Observe navigation result from AddActivityFragment
         findNavController().currentBackStackEntry?.savedStateHandle?.getLiveData<ActivityData>("activityData")?.observe(viewLifecycleOwner) { activityData ->
             // Update dataset with new activity data
             activityList.add(activityData)
             // Notify adapter that the dataset has changed
             adapter.notifyDataSetChanged()
+
         }
 
         // Set up OnClickListener for addActivityButton
@@ -55,4 +59,6 @@ class ActivityFragment : Fragment() {
             findNavController().navigate(R.id.action_activityFragment_to_addActivityFragment)
         }
     }
+
+
 }

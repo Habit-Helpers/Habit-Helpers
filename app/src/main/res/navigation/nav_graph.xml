@@ -91,14 +91,21 @@
             android:id="@+id/remindersFragment"
             android:name="com.example.habit_helper.RemindersFragment"
             android:label="fragment_reminders"
-            tools:layout="@layout/fragment_reminders" >
-
+            tools:layout="@layout/fragment_reminders">
+            <action
+                android:id="@+id/action_remindersFragment_to_addTaskFragment"
+                app:destination="@id/addTaskFragment" />
         </fragment>
 
         <fragment
             android:id="@+id/insightsFragment"
             android:name="com.example.habit_helper.InsightsFragment"
             android:label="InsightsFragment">
+
+            <action
+                android:id="@+id/action_insightsFragment_to_addNewGoalFragment"
+                app:destination="@id/addNewGoalFragment" />
+
 
         </fragment>
 
@@ -118,6 +125,23 @@
             android:id="@+id/action_addActivityFragment_to_activitiesFragment"
             app:destination="@id/activitiesFragment" />
 
+        </fragment>
+
+        <fragment
+            android:id="@+id/addTaskFragment"
+            android:name="com.example.habit_helper.AddTaskFragment"
+            android:label="Add Task"
+            tools:layout="@layout/fragment_add_task" />
+
+        <fragment
+            android:id="@+id/addNewGoalFragment"
+            android:name="com.example.habit_helper.AddNewGoalFragment"
+            android:label="fragment_add_new_goal"
+            tools:layout="@layout/fragment_add_new_goal" >
+
+            <action
+                android:id="@+id/action_addNewGoalFragment_to_insightsFragment"
+                app:destination="@id/insightsFragment" />
         </fragment>
 
 
