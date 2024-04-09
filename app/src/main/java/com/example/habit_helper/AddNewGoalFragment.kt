@@ -12,6 +12,7 @@ import androidx.navigation.fragment.findNavController
 
 class AddNewGoalFragment : Fragment() {
 
+    private lateinit var dbHelper: GoalsDatabaseHelper
     private lateinit var goalNameEditText: EditText
     private lateinit var saveButton: Button
 
@@ -20,12 +21,14 @@ class AddNewGoalFragment : Fragment() {
         container: ViewGroup?,
         savedInstanceState: Bundle?
     ): View? {
-        // Inflate the layout for this fragment
         val view = inflater.inflate(R.layout.fragment_add_new_goal, container, false)
 
-        // Find views
+        // Initialize Views
         goalNameEditText = view.findViewById(R.id.goalNameEditText)
         saveButton = view.findViewById(R.id.saveButton)
+
+        // Initialize Database Helper
+        dbHelper = GoalsDatabaseHelper(requireContext())
 
         // Set up OnClickListener for saveButton
         saveButton.setOnClickListener {
@@ -36,21 +39,18 @@ class AddNewGoalFragment : Fragment() {
     }
 
     private fun saveGoal() {
-        // Retrieve goal details from EditText
+        // Retrieve goal name from EditText
         val goalName = goalNameEditText.text.toString()
 
-        // Validate input
-        if (goalName.isEmpty()) {
-            // Show error message if goal name is empty
-            Toast.makeText(requireContext(), "Please enter a goal name", Toast.LENGTH_SHORT).show()
-            return
-        }
+        // Add goal to database
+        dbHelper.addGoal(goalName)
 
-        // Save the goal (e.g., to a database)
-        // For demonstration purposes, let's just show a toast message
+        // Show a toast message or perform any other action if needed
         Toast.makeText(requireContext(), "Goal saved: $goalName", Toast.LENGTH_SHORT).show()
 
-        // Navigate back to Insights fragment
+
+        // Navigate back to previous fragment
         findNavController().navigateUp()
     }
 }
+

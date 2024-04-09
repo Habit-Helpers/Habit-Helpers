@@ -64,5 +64,6 @@
     <string name="in_progress">In Progress</string>
     <string name="Goalsave">Save</string>
     <string name="enter_goal_name">Enter Goal Name</string>
+    <string name="add_goal">Add Goal</string>
 
 </resources>

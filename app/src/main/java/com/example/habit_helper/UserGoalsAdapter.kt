@@ -6,7 +6,7 @@ import android.view.ViewGroup
 import android.widget.TextView
 import androidx.recyclerview.widget.RecyclerView
 
-class UserGoalsAdapter(private val userGoals: List<String>) : RecyclerView.Adapter<UserGoalsAdapter.ViewHolder>() {
+class UserGoalsAdapter(private var userGoals: List<Goal>) : RecyclerView.Adapter<UserGoalsAdapter.ViewHolder>() {
 
     override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): ViewHolder {
         val view = LayoutInflater.from(parent.context).inflate(R.layout.item_user_goal, parent, false)
@@ -20,12 +20,20 @@ class UserGoalsAdapter(private val userGoals: List<String>) : RecyclerView.Adapt
     override fun getItemCount(): Int {
         return userGoals.size
     }
+    fun updateGoals(newGoals: List<Goal>) {
+        userGoals = newGoals
+        notifyDataSetChanged()
+    }
 
     inner class ViewHolder(itemView: View) : RecyclerView.ViewHolder(itemView) {
-        private val userGoalTextView: TextView = itemView.findViewById(R.id.userGoalTextView)
+        private val goalNameTextView: TextView = itemView.findViewById(R.id.goalNameEditText)
+        private val goalDescriptionTextView: TextView = itemView.findViewById(R.id.descriptionEditText)
+        private val goalStatusTextView: TextView = itemView.findViewById(R.id.statusRadioGroup)
 
-        fun bind(userGoal: String) {
-            userGoalTextView.text = userGoal
+        fun bind(goal: Goal) {
+            goalNameTextView.text = goal.name
+            goalDescriptionTextView.text = goal.description
+            goalStatusTextView.text = goal.status
         }
     }
 }
