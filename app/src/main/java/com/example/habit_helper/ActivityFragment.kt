@@ -19,7 +19,11 @@ class ActivityFragment : Fragment() {
     private lateinit var emptyView: TextView
 
     // Example list of activities
-    private val activityList = mutableListOf<ActivityData>()
+    private val activityList = listOf(
+        ActivityItem("Activity 1", "Description 1", "Color 1"),
+        ActivityItem("Activity 2", "Description 2", "Color 2"),
+        // Add more activity items as needed
+    )
 
     override fun onCreateView(
         inflater: LayoutInflater,
@@ -42,23 +46,13 @@ class ActivityFragment : Fragment() {
         recyclerViewGoals.adapter = adapter
         recyclerViewGoals.layoutManager = LinearLayoutManager(context)
 
-        // Set up line chart
-
-        // Observe navigation result from AddActivityFragment
-        findNavController().currentBackStackEntry?.savedStateHandle?.getLiveData<ActivityData>("activityData")?.observe(viewLifecycleOwner) { activityData ->
-            // Update dataset with new activity data
-            activityList.add(activityData)
-            // Notify adapter that the dataset has changed
-            adapter.notifyDataSetChanged()
-
-        }
-
         // Set up OnClickListener for addActivityButton
         addActivityButton.setOnClickListener {
             // Navigate to the AddActivityFragment
             findNavController().navigate(R.id.action_activityFragment_to_addActivityFragment)
         }
     }
-
-
 }
+
+
+

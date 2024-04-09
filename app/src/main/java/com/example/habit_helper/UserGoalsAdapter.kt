@@ -20,20 +20,26 @@ class UserGoalsAdapter(private var userGoals: List<Goal>) : RecyclerView.Adapter
     override fun getItemCount(): Int {
         return userGoals.size
     }
+
     fun updateGoals(newGoals: List<Goal>) {
         userGoals = newGoals
         notifyDataSetChanged()
     }
 
     inner class ViewHolder(itemView: View) : RecyclerView.ViewHolder(itemView) {
-        private val goalNameTextView: TextView = itemView.findViewById(R.id.goalNameEditText)
-        private val goalDescriptionTextView: TextView = itemView.findViewById(R.id.descriptionEditText)
-        private val goalStatusTextView: TextView = itemView.findViewById(R.id.statusRadioGroup)
+
+        private val goalNameTextView: TextView? = itemView.findViewById(R.id.goalNameEditText)
+        private val goalDescriptionTextView: TextView? = itemView.findViewById(R.id.descriptionEditText)
+        private val goalStatusTextView: TextView? = itemView.findViewById(R.id.statusRadioGroup)
+
+
+
 
         fun bind(goal: Goal) {
-            goalNameTextView.text = goal.name
-            goalDescriptionTextView.text = goal.description
-            goalStatusTextView.text = goal.status
+            goalNameTextView?.text = goal.name
+            goalDescriptionTextView?.text = goal.description
+            goalStatusTextView?.text = goal.status
         }
+
     }
 }

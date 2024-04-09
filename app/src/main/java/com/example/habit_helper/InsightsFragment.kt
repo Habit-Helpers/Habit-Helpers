@@ -13,8 +13,8 @@ import androidx.recyclerview.widget.RecyclerView
 
 class InsightsFragment : Fragment() {
 
-    private lateinit var dbHelper: GoalsDatabaseHelper
     private lateinit var userGoalsAdapter: UserGoalsAdapter
+    private lateinit var dbHelper: GoalsDatabaseHelper
 
     override fun onCreateView(
         inflater: LayoutInflater, container: ViewGroup?,
@@ -23,8 +23,9 @@ class InsightsFragment : Fragment() {
         // Inflate the layout for this fragment
         val view = inflater.inflate(R.layout.fragment_insights, container, false)
 
-        // Initialize RecyclerViews
+        // Initialize RecyclerView
         val recyclerViewRecommendedChanges = view.findViewById<RecyclerView>(R.id.recyclerViewRecommendedChanges)
+        val recyclerViewUserGoals = view.findViewById<RecyclerView>(R.id.recyclerViewUserGoals)
 
         // Sample data for recommended changes
         val recommendedChangesList = listOf("Change 1", "Change 2", "Change 3")
@@ -34,14 +35,17 @@ class InsightsFragment : Fragment() {
         recyclerViewRecommendedChanges.adapter = recommendedChangesAdapter
         recyclerViewRecommendedChanges.layoutManager = LinearLayoutManager(context, LinearLayoutManager.HORIZONTAL, false)
 
-        // Initialize database helper
-        dbHelper = GoalsDatabaseHelper(requireContext())
-
         // Initialize user goals RecyclerView and adapter
-        val recyclerViewUserGoals = view.findViewById<RecyclerView>(R.id.recyclerViewUserGoals)
         userGoalsAdapter = UserGoalsAdapter(emptyList())
         recyclerViewUserGoals.adapter = userGoalsAdapter
         recyclerViewUserGoals.layoutManager = LinearLayoutManager(context)
+
+        // Initialize dbHelper
+        dbHelper = GoalsDatabaseHelper(requireContext())
+
+        // Fetch goals from the database and update the adapter
+        val goals = dbHelper.getAllGoals()
+        userGoalsAdapter.updateGoals(goals)
 
         return view
     }
@@ -56,26 +60,6 @@ class InsightsFragment : Fragment() {
             findNavController().navigate(R.id.action_insightsFragment_to_addNewGoalFragment)
         }
     }
-
-    override fun onResume() {
-        super.onResume()
-        // Reload and display user goals
-        loadUserGoals()
-    }
-
-
-    private fun loadUserGoals() {
-        // Retrieve user goals from the database
-        Log.d("InsightsFragment", "Loading user goals from the database")
-        var userGoalsList: List<Goal> = dbHelper.getAllGoals()
-        Log.d("InsightsFragment", "User goals retrieved from database: $userGoalsList")
-
-        // Reverse the order of the user goals list
-        userGoalsList = userGoalsList.reversed()
-
-        // Update the RecyclerView adapter with the loaded user goals
-        userGoalsAdapter.updateGoals(userGoalsList)
-    }
-
 }
+
 

@@ -6,10 +6,11 @@ import android.view.ViewGroup
 import android.widget.TextView
 import androidx.recyclerview.widget.RecyclerView
 
-class ActivityAdapter(private var activityList: List<ActivityData>) : RecyclerView.Adapter<ActivityAdapter.ViewHolder>() {
+class ActivityAdapter(private val activityList: List<ActivityItem>) : RecyclerView.Adapter<ActivityAdapter.ViewHolder>() {
 
     inner class ViewHolder(itemView: View) : RecyclerView.ViewHolder(itemView) {
         val activityNameTextView: TextView = itemView.findViewById(R.id.activityNameTextView)
+        val activityDescriptionTextView: TextView = itemView.findViewById(R.id.activityDescriptionTextView)
         val colorLabelTextView: TextView = itemView.findViewById(R.id.colorLabelTextView)
     }
 
@@ -19,13 +20,13 @@ class ActivityAdapter(private var activityList: List<ActivityData>) : RecyclerVi
     }
 
     override fun onBindViewHolder(holder: ViewHolder, position: Int) {
-        val currentItem = activityList[position]
-        holder.activityNameTextView.text = currentItem.activityName
-        holder.colorLabelTextView.text = currentItem.colorLabel
+        val activity = activityList[position]
+        holder.activityNameTextView.text = activity.name
+        holder.activityDescriptionTextView.text = activity.description
+        holder.colorLabelTextView.text = activity.colorLabel
     }
 
-
-    override fun getItemCount() = activityList.size
-
-
+    override fun getItemCount(): Int {
+        return activityList.size
+    }
 }

@@ -13,7 +13,7 @@
         android:layout_height="?attr/actionBarSize"
         android:background="@color/green"
         android:paddingBottom="0dp"
-        app:title="Add New Activity" />
+        app:title="Add New Task" />
 
     <EditText
         android:id="@+id/taskNameEditText"
