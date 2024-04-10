@@ -20,16 +20,12 @@
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintBottom_toTopOf="@id/text_welcome"/>
 
-    <WebView
-        android:id="@+id/webView"
-        android:layout_width="match_parent"
-        android:layout_height="250dp" />
 
 
     <TextView
        android:layout_width="wrap_content"
        android:layout_height="wrap_content"
-       android:layout_marginTop="20dp"
+       android:layout_marginTop="250dp"
        android:text="@string/your_activities"
        android:textStyle="bold"
        android:layout_marginStart="40dp"
@@ -39,7 +35,7 @@
 
     <!-- RecyclerView for Activities -->
     <androidx.recyclerview.widget.RecyclerView
-        android:id="@+id/recyclerViewGoals"
+        android:id="@+id/recyclerViewActivities"
         android:layout_width="337dp"
         android:layout_height="196dp"
         android:layout_marginStart="40dp"

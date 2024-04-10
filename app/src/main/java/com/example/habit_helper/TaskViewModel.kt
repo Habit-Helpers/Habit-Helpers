@@ -1,6 +1,7 @@
 package com.example.habit_helper
 
 import android.app.Application
+import android.util.Log
 import androidx.lifecycle.AndroidViewModel
 import androidx.lifecycle.viewModelScope
 import kotlinx.coroutines.launch
@@ -14,6 +15,8 @@ class TaskViewModel(application: Application) : AndroidViewModel(application) {
     }
 
     fun insertTask(task: Task) {
+        Log.d("TaskViewModel", "Inserting task: $task")
+
         viewModelScope.launch {
             repository.insert(task)
         }

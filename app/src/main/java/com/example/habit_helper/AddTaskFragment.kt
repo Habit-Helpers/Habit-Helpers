@@ -1,6 +1,7 @@
 package com.example.habit_helper
 
 import android.os.Bundle
+import android.util.Log
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
@@ -25,6 +26,7 @@ class AddTaskFragment : Fragment() {
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
+        Log.d("AddTaskFragment", "onViewCreated()")
 
         // Set up OnClickListener for Save button
         val saveButton: Button = view.findViewById(R.id.saveButton)
@@ -32,10 +34,12 @@ class AddTaskFragment : Fragment() {
             // Retrieve task data from input fields
             val taskName: String = view.findViewById<EditText>(R.id.taskNameEditText).text.toString()
             val taskDate: String = view.findViewById<EditText>(R.id.taskDateEditText).text.toString()
+            Log.d("AddTaskFragment", "Save button clicked. Task name: $taskName, Task date: $taskDate")
 
             // Save task data to database or data source
             val newTask = Task(taskName, taskDate)
             viewModel.insertTask(newTask)
+            Log.d("AddTaskFragment", "New task inserted into database")
 
             // Navigate back to the previous fragment (assuming Reminders fragment)
             findNavController().navigateUp()

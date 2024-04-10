@@ -1,12 +1,13 @@
 package com.example.habit_helper
 
+import android.util.Log
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import android.widget.TextView
 import androidx.recyclerview.widget.RecyclerView
 
-class ActivityAdapter(private val activityList: List<ActivityItem>) : RecyclerView.Adapter<ActivityAdapter.ViewHolder>() {
+class ActivityAdapter(private var activityList: List<ActivityItem>) : RecyclerView.Adapter<ActivityAdapter.ViewHolder>() {
 
     inner class ViewHolder(itemView: View) : RecyclerView.ViewHolder(itemView) {
         val activityNameTextView: TextView = itemView.findViewById(R.id.activityNameTextView)
@@ -28,5 +29,12 @@ class ActivityAdapter(private val activityList: List<ActivityItem>) : RecyclerVi
 
     override fun getItemCount(): Int {
         return activityList.size
+    }
+
+    fun updateActivities(newActivities: List<ActivityItem>) {
+        activityList = newActivities
+        Log.d("ActivityAdapter", "Activity list updated: $activityList")
+
+        notifyDataSetChanged()
     }
 }

@@ -1,7 +1,5 @@
 package com.example.habit_helper
 
-
-import android.annotation.SuppressLint
 import android.content.ContentValues
 import android.content.Context
 import android.database.Cursor
@@ -67,38 +65,63 @@ class GoalsDatabaseHelper(context: Context) : SQLiteOpenHelper(context, DATABASE
         onCreate(db)
     }
 
-    fun addGoal(goalName: String) {
+    fun addGoal(goalName: String, goalDescription: String, goalStatus: String) {
+        // Check if the goal's name and description are not null or empty
+        if (goalName.isEmpty() || goalDescription.isEmpty()) {
+            Log.e("GoalsDatabaseHelper", "Goal name or description is null or empty")
+            return // Return without inserting if input is invalid
+        }
+
         val db = writableDatabase
         val values = ContentValues().apply {
             put(COLUMN_GOAL_NAME, goalName)
+            put(COLUMN_GOAL_DESCRIPTION, goalDescription)
+            put(COLUMN_GOAL_STATUS, goalStatus)
         }
+
         db.insert(TABLE_GOALS, null, values)
         db.close()
     }
 
-    @SuppressLint("Range")
+
     fun getAllGoals(): List<Goal> {
         val goalsList = mutableListOf<Goal>()
         val selectQuery = "SELECT * FROM $TABLE_GOALS"
         val db = readableDatabase
-        var cursor: Cursor? = null
+        var innerCursor: Cursor? = null
 
         try {
-            cursor = db.rawQuery(selectQuery, null)
+            innerCursor = db.rawQuery(selectQuery, null)
 
-            cursor?.use { cursor ->
+            innerCursor?.use { cursor ->
+                val goalNameIndex = cursor.getColumnIndex(COLUMN_GOAL_NAME)
+                val goalDescriptionIndex = cursor.getColumnIndex(COLUMN_GOAL_DESCRIPTION)
+                val goalStatusIndex = cursor.getColumnIndex(COLUMN_GOAL_STATUS)
+
+                Log.d("GoalsDatabaseHelper", "goalNameIndex: $goalNameIndex")
+                Log.d("GoalsDatabaseHelper", "goalDescriptionIndex: $goalDescriptionIndex")
+                Log.d("GoalsDatabaseHelper", "goalStatusIndex: $goalStatusIndex")
+
                 while (cursor.moveToNext()) {
-                    val goalName = cursor.getString(cursor.getColumnIndex(COLUMN_GOAL_NAME))
-                    val goalDescription = cursor.getString(cursor.getColumnIndex(COLUMN_GOAL_DESCRIPTION))
-                    val goalStatus = cursor.getString(cursor.getColumnIndex(COLUMN_GOAL_STATUS))
-                    val goal = Goal(goalName, goalDescription, goalStatus)
-                    goalsList.add(goal)
+                    val goalName = cursor.getString(goalNameIndex)
+                    val goalDescription = cursor.getString(goalDescriptionIndex)
+                    val goalStatus = cursor.getString(goalStatusIndex)
+
+                    Log.d("GoalsDatabaseHelper", "Retrieved goalName: $goalName, goalDescription: $goalDescription, goalStatus: $goalStatus")
+
+
+                    if (goalName != null && goalDescription != null && goalStatus != null) {
+                        val goal = Goal(goalName, goalDescription, goalStatus)
+                        goalsList.add(goal)
+                    } else {
+                        Log.e("GoalsDatabaseHelper", "One or more columns were null")
+                    }
                 }
             }
         } catch (e: Exception) {
-            Log.e("GoalsDatabaseHelper", "Error fetching goals: ${e.message}")
+            Log.e("GoalsDatabaseHelper", "Error fetching goals", e)
         } finally {
-            cursor?.close()
+            innerCursor?.close()
             db.close()
         }
 
@@ -106,4 +129,3 @@ class GoalsDatabaseHelper(context: Context) : SQLiteOpenHelper(context, DATABASE
         return goalsList
     }
 }
-

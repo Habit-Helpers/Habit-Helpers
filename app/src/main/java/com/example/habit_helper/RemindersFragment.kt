@@ -1,6 +1,5 @@
 package com.example.habit_helper
 
-
 import android.os.Bundle
 import android.util.Log
 import android.view.LayoutInflater
@@ -12,7 +11,6 @@ import androidx.fragment.app.Fragment
 import androidx.navigation.fragment.findNavController
 import androidx.recyclerview.widget.LinearLayoutManager
 import androidx.recyclerview.widget.RecyclerView
-
 
 class RemindersFragment : Fragment() {
 
@@ -30,6 +28,8 @@ class RemindersFragment : Fragment() {
         recyclerViewReminders = view.findViewById(R.id.recyclerViewReminders)
         addNewButton = view.findViewById(R.id.button2)
 
+        recyclerViewReminders.layoutManager = LinearLayoutManager(requireContext())
+
         calendarView.setOnDateChangeListener { _, year, month, dayOfMonth ->
             val selectedDate = "$year-${month + 1}-$dayOfMonth"
             Log.d("RemindersFragment", "Selected date: $selectedDate")
@@ -38,8 +38,6 @@ class RemindersFragment : Fragment() {
             val remindersList = listOf("Reminder 1", "Reminder 2", "Reminder 3")
             updateRecyclerView(remindersList)
         }
-
-        recyclerViewReminders.layoutManager = LinearLayoutManager(requireContext())
 
         addNewButton.setOnClickListener {
             // Navigate to the AddTaskFragment when the button is clicked
@@ -52,7 +50,7 @@ class RemindersFragment : Fragment() {
     private fun updateRecyclerView(remindersList: List<String>) {
         Log.d("RemindersFragment", "Updating RecyclerView with ${remindersList.size} reminders")
         val adapter = RemindersAdapter(remindersList)
-        recyclerViewReminders.adapter = adapter
+        recyclerViewReminders.adapter = adapter // Set the adapter here
     }
-
 }
+

@@ -1,29 +1,26 @@
 package com.example.habit_helper
 
+
 import android.os.Bundle
+import android.util.Log
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import android.widget.Button
 import android.widget.TextView
 import androidx.fragment.app.Fragment
+import androidx.fragment.app.viewModels
 import androidx.navigation.fragment.findNavController
 import androidx.recyclerview.widget.LinearLayoutManager
 import androidx.recyclerview.widget.RecyclerView
 
-
 class ActivityFragment : Fragment() {
 
-    private lateinit var recyclerViewGoals: RecyclerView
+    private lateinit var recyclerViewActivities: RecyclerView
     private lateinit var addActivityButton: Button
     private lateinit var emptyView: TextView
-
-    // Example list of activities
-    private val activityList = listOf(
-        ActivityItem("Activity 1", "Description 1", "Color 1"),
-        ActivityItem("Activity 2", "Description 2", "Color 2"),
-        // Add more activity items as needed
-    )
+    private val viewModel: ActivityViewModel by viewModels()
+    private lateinit var adapter: ActivityAdapter
 
     override fun onCreateView(
         inflater: LayoutInflater,
@@ -35,16 +32,36 @@ class ActivityFragment : Fragment() {
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
+        Log.d("ActivityFragment", "onViewCreated")
 
         // Find views
-        recyclerViewGoals = view.findViewById(R.id.recyclerViewGoals)
+        recyclerViewActivities = view.findViewById(R.id.recyclerViewActivities) // Updated variable name
         addActivityButton = view.findViewById(R.id.addActivityButton)
         emptyView = view.findViewById(R.id.emptyView)
 
-        // Set up RecyclerView
-        val adapter = ActivityAdapter(activityList)
-        recyclerViewGoals.adapter = adapter
-        recyclerViewGoals.layoutManager = LinearLayoutManager(context)
+
+
+
+        // Set up RecyclerView adapter
+        adapter = ActivityAdapter(emptyList())
+        recyclerViewActivities.adapter = adapter
+        recyclerViewActivities.layoutManager = LinearLayoutManager(context)
+
+        // Observe the list of activities from the ViewModel
+        viewModel.activityList.observe(viewLifecycleOwner) { activities ->
+            Log.d("ActivityFragment", "Received new activity list: $activities")
+
+            if (activities.isEmpty()) {
+                recyclerViewActivities.visibility = View.GONE
+                emptyView.visibility = View.VISIBLE
+            } else {
+                recyclerViewActivities.visibility = View.VISIBLE
+                emptyView.visibility = View.GONE
+                adapter.updateActivities(activities)
+                Log.d("ActivityFragment", "Adapter updated with new activities: $activities")
+
+            }
+        }
 
         // Set up OnClickListener for addActivityButton
         addActivityButton.setOnClickListener {
@@ -53,6 +70,4 @@ class ActivityFragment : Fragment() {
         }
     }
 }
-
-
 

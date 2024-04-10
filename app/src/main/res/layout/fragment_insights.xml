@@ -15,10 +15,7 @@
         app:title="Insights"
         android:paddingBottom="0dp" />
 
-
-
-
-    <!-- Horizontal RecyclerView for recommended changes -->
+    <!-- RecyclerView for recommended changes -->
     <androidx.recyclerview.widget.RecyclerView
         android:id="@+id/recyclerViewRecommendedChanges"
         android:layout_width="match_parent"
@@ -29,23 +26,37 @@
         android:scrollbars="horizontal"
         android:overScrollMode="never"/>
 
-    <!-- RecyclerView for user inputted goals -->
-    <androidx.recyclerview.widget.RecyclerView
-        android:id="@+id/recyclerViewUserGoals"
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:layout_marginTop="16dp"
-        android:paddingHorizontal="16dp"
-        android:clipToPadding="false"
-        android:scrollbars="vertical"/>
+    <!-- NestedScrollView encapsulating RecyclerView for user inputted goals -->
+
 
     <!-- Button to add user inputted goals -->
+    <androidx.core.widget.NestedScrollView
+        android:layout_width="match_parent"
+        android:layout_height="0dp"
+        android:layout_weight="1.5">
+
+        <androidx.recyclerview.widget.RecyclerView
+            android:id="@+id/recyclerViewUserGoals"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="16dp"
+            android:clipToPadding="false"
+            android:paddingHorizontal="16dp"
+            android:scrollbars="vertical" />
+
+    </androidx.core.widget.NestedScrollView>
+
     <Button
         android:id="@+id/buttonAddGoal"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_gravity="center_horizontal"
-        android:layout_marginTop="16dp"
         android:text="@string/add_goal" />
+
+    <!-- Placeholder for space at the bottom -->
+    <View
+        android:layout_width="match_parent"
+        android:layout_height="0dp"
+        android:layout_weight="1" />
 
 </LinearLayout>

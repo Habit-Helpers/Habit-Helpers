@@ -1,6 +1,7 @@
 package com.example.habit_helper
 
 import android.os.Bundle
+import android.util.Log
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
@@ -9,6 +10,7 @@ import android.widget.Button
 import android.widget.EditText
 import android.widget.Spinner
 import androidx.fragment.app.Fragment
+import androidx.fragment.app.viewModels
 import androidx.navigation.fragment.findNavController
 
 class AddActivityFragment : Fragment() {
@@ -17,6 +19,8 @@ class AddActivityFragment : Fragment() {
     private lateinit var editTextDescription: EditText
     private lateinit var spinnerColorLabel: Spinner
     private lateinit var buttonSaveActivity: Button
+
+    private val viewModel: ActivityViewModel by viewModels()
 
     override fun onCreateView(
         inflater: LayoutInflater,
@@ -53,14 +57,14 @@ class AddActivityFragment : Fragment() {
         val activityDescription = editTextDescription.text.toString().trim()
         val selectedColor = spinnerColorLabel.selectedItem.toString()
 
-        // Create a bundle to hold the activity data
-        val bundle = Bundle().apply {
-            putString("activityName", activityName)
-            putString("activityDescription", activityDescription)
-            putString("selectedColor", selectedColor)
-        }
+        // Create an ActivityItem object with the user's input
+        val newActivity = ActivityItem(activityName, activityDescription, selectedColor)
 
-        // Navigate to the ActivitiesFragment and pass the bundle as arguments
-        findNavController().navigate(R.id.action_addActivityFragment_to_activitiesFragment, bundle)
+        // Add the new activity to the ViewModel
+        viewModel.addActivity(newActivity)
+        Log.d("AddActivityFragment", "New activity saved: $newActivity")
+
+        // Navigate back to the ActivitiesFragment
+        findNavController().navigateUp()
     }
 }

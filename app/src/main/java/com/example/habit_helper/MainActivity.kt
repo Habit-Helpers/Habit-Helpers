@@ -77,4 +77,6 @@ class MainActivity : AppCompatActivity() {
     private fun hideBottomNavigation() {
         findViewById<BottomNavigationView>(R.id.bottom_navigation).visibility = View.GONE
     }
+
+
 }
