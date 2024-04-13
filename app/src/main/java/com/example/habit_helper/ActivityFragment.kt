@@ -40,6 +40,7 @@ class ActivityFragment : Fragment() {
         emptyView = view.findViewById(R.id.emptyView)
 
 
+        Log.d("ActivityFragment", "RecyclerView initialized: ${true}")
 
 
         // Set up RecyclerView adapter
@@ -52,9 +53,11 @@ class ActivityFragment : Fragment() {
             Log.d("ActivityFragment", "Received new activity list: $activities")
 
             if (activities.isEmpty()) {
+                Log.d("ActivityFragment", "RecyclerView is hidden, empty view is visible")
                 recyclerViewActivities.visibility = View.GONE
                 emptyView.visibility = View.VISIBLE
             } else {
+                Log.d("ActivityFragment", "RecyclerView is visible, empty view is hidden")
                 recyclerViewActivities.visibility = View.VISIBLE
                 emptyView.visibility = View.GONE
                 adapter.updateActivities(activities)

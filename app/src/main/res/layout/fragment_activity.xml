@@ -51,7 +51,6 @@
 
     <!-- Button to Add New Activity -->
 
-    <!-- Empty View -->
 
     <Button
         android:id="@+id/addActivityButton"

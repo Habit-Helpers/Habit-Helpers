@@ -65,5 +65,12 @@
     <string name="Goalsave">Save</string>
     <string name="enter_goal_name">Enter Goal Name</string>
     <string name="add_goal">Add Goal</string>
+    <string name="resetemail">Email</string>
+    <string name="Reset_password">Reset Password</string>
+    <string name="emaillabel">Email:</string>
+    <string name="enter_your_email">Enter your email</string>
+    <string name="new_password">New Password:</string>
+    <string name="enter_your_new_password">Enter your new password</string>
+    <string name="reset_passwordb">Reset Password</string>
 
 </resources>

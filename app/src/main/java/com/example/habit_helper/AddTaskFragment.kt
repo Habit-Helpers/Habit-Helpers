@@ -8,13 +8,11 @@ import android.view.ViewGroup
 import android.widget.Button
 import android.widget.EditText
 import androidx.fragment.app.Fragment
-import androidx.fragment.app.viewModels
 import androidx.navigation.fragment.findNavController
 
 class AddTaskFragment : Fragment() {
 
-    // Initialize TaskViewModel using viewModels delegate
-    private val viewModel: TaskViewModel by viewModels()
+    private lateinit var databaseHelper: TasksDatabaseHelper
 
     override fun onCreateView(
         inflater: LayoutInflater, container: ViewGroup?,
@@ -28,22 +26,39 @@ class AddTaskFragment : Fragment() {
         super.onViewCreated(view, savedInstanceState)
         Log.d("AddTaskFragment", "onViewCreated()")
 
+        // Initialize the database helper
+        databaseHelper = TasksDatabaseHelper(requireContext())
+
         // Set up OnClickListener for Save button
         val saveButton: Button = view.findViewById(R.id.saveButton)
         saveButton.setOnClickListener {
-            // Retrieve task data from input fields
-            val taskName: String = view.findViewById<EditText>(R.id.taskNameEditText).text.toString()
-            val taskDate: String = view.findViewById<EditText>(R.id.taskDateEditText).text.toString()
-            Log.d("AddTaskFragment", "Save button clicked. Task name: $taskName, Task date: $taskDate")
 
-            // Save task data to database or data source
-            val newTask = Task(taskName, taskDate)
-            viewModel.insertTask(newTask)
-            Log.d("AddTaskFragment", "New task inserted into database")
+            val taskName = view.findViewById<EditText>(R.id.taskNameEditText).text.toString()
+            val taskDate = view.findViewById<EditText>(R.id.taskDateEditText).text.toString()
+
+            // Check if taskName and taskDate are not empty
+            if (taskName.isNotEmpty() && taskDate.isNotEmpty()) {
+                // Save task to the database
+                saveTask(taskName, taskDate)
+                Log.d("AddTaskFragment", "Task saved to database: $taskName, $taskDate")
+            } else {
+                Log.e("AddTaskFragment", "Task name or date is empty")
+            }
 
             // Navigate back to the previous fragment (assuming Reminders fragment)
             findNavController().navigateUp()
         }
     }
 
+    // This method saves the task to the database and notifies the parent fragment
+    private fun saveTask(taskName: String, taskDate: String) {
+        // Add task to the database
+        databaseHelper.addTask(taskName, taskDate)
+
+        // Find the parent fragment (RemindersFragment)
+        val remindersFragment = parentFragment as? RemindersFragment
+        remindersFragment?.addTask(Task(taskName, taskDate))
+    }
+
 }
+

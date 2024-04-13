@@ -45,7 +45,10 @@ class InsightsFragment : Fragment() {
 
         // Fetch goals from the database and update the adapter
         val goals = dbHelper.getAllGoals()
-        userGoalsAdapter.updateGoals(goals)
+
+        val reversedGoals = goals.reversed()
+
+        userGoalsAdapter.updateGoals(reversedGoals)
 
         return view
     }

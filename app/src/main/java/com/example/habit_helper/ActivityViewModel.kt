@@ -16,5 +16,7 @@ class ActivityViewModel : ViewModel() {
 
         Log.d("ActivityViewModel", "New activity added: $activity")
         Log.d("ActivityViewModel", "Updated activity list: ${_activityList.value}")
+
     }
+
 }

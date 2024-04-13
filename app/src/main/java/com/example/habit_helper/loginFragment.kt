@@ -29,6 +29,7 @@ class LoginFragment : Fragment() {
         val editTextPassword = view.findViewById<EditText>(R.id.editTextPassword)
         val buttonLogin = view.findViewById<Button>(R.id.buttonLogin)
         val signUpLink = view.findViewById<TextView>(R.id.text_sign_up)
+        val forgotPasswordLink = view.findViewById<TextView>(R.id.text_forgot_password)
 
         // Set click listener for login button
         buttonLogin.setOnClickListener {
@@ -51,6 +52,12 @@ class LoginFragment : Fragment() {
         signUpLink.setOnClickListener {
             // Navigate to the sign-up fragment
             findNavController().navigate(R.id.action_loginFragment_to_signUpFragment)
+        }
+
+        // Setup click listener for the "Forgot Password?" link/button
+        forgotPasswordLink.setOnClickListener {
+            // Navigate to the password reset screen when the user clicks "Forgot Password?"
+            findNavController().navigate(R.id.action_loginFragment_to_forgotPasswordFragment)
         }
 
     }

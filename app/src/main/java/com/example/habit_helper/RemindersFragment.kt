@@ -17,6 +17,8 @@ class RemindersFragment : Fragment() {
     private lateinit var calendarView: CalendarView
     private lateinit var recyclerViewReminders: RecyclerView
     private lateinit var addNewButton: Button
+    private lateinit var taskAdapter: TaskAdapter
+    private lateinit var databaseHelper: TasksDatabaseHelper
 
     override fun onCreateView(
         inflater: LayoutInflater, container: ViewGroup?,
@@ -30,13 +32,15 @@ class RemindersFragment : Fragment() {
 
         recyclerViewReminders.layoutManager = LinearLayoutManager(requireContext())
 
+        taskAdapter = TaskAdapter(emptyList()) // Initialize TaskAdapter with empty list
+        recyclerViewReminders.adapter = taskAdapter // Set adapter to RecyclerView
+
+        databaseHelper = TasksDatabaseHelper(requireContext())
+
         calendarView.setOnDateChangeListener { _, year, month, dayOfMonth ->
             val selectedDate = "$year-${month + 1}-$dayOfMonth"
             Log.d("RemindersFragment", "Selected date: $selectedDate")
-
-            // For demonstration purposes, I'll use a sample list of reminders
-            val remindersList = listOf("Reminder 1", "Reminder 2", "Reminder 3")
-            updateRecyclerView(remindersList)
+            // If needed, you can query tasks for the selected date from the database here
         }
 
         addNewButton.setOnClickListener {
@@ -47,10 +51,20 @@ class RemindersFragment : Fragment() {
         return view
     }
 
-    private fun updateRecyclerView(remindersList: List<String>) {
-        Log.d("RemindersFragment", "Updating RecyclerView with ${remindersList.size} reminders")
-        val adapter = RemindersAdapter(remindersList)
-        recyclerViewReminders.adapter = adapter // Set the adapter here
+    override fun onResume() {
+        super.onResume()
+        // Load tasks from the database and update the RecyclerView
+        loadTasks()
+    }
+
+    private fun loadTasks() {
+        val tasks = databaseHelper.getAllTasks()
+        taskAdapter.updateTasks(tasks)
+    }
+
+    // This method will be called by AddTaskFragment to add a new task
+    fun addTask(task: Task) {
+        databaseHelper.addTask(task.name, task.date)
+        loadTasks() // Reload tasks after adding a new task
     }
 }
-
