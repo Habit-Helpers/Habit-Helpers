@@ -5,15 +5,15 @@
     android:layout_height="match_parent"
     xmlns:app="http://schemas.android.com/apk/res-auto"
     android:orientation="vertical"
-    android:padding="16dp">
+    >
 
     <!-- Account Information Section -->
     <androidx.appcompat.widget.Toolbar
         android:id="@+id/toolbar"
-        android:layout_width="match_parent"
-        android:layout_height="?attr/actionBarSize"
+        android:layout_width="421dp"
+        android:layout_height="wrap_content"
         android:background="@color/green"
-        app:title="Profile Settings" />
+        app:title="Edit Account" />
 
 
     <TextView
@@ -23,6 +23,7 @@
         android:text="@string/account_information"
         android:textStyle="bold"
         android:textSize="18sp"
+        android:layout_marginStart="20dp"
         android:layout_marginTop="40dp"
         android:layout_marginBottom="8dp"/>
 
@@ -62,17 +63,17 @@
 
     <!-- Save Button -->
 
+    <!-- Health Stats Section -->
+
+
     <Button
         android:id="@+id/buttonResetPassword"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
+        android:layout_marginStart="290dp"
         android:layout_marginTop="0dp"
-        android:layout_marginStart="220dp"
-        android:layout_marginEnd="20dp"
+        android:layout_marginEnd="5dp"
         android:text="@string/reset_password" />
-
-    <!-- Health Stats Section -->
-
 
     <TextView
         android:id="@+id/textViewHealthStats"
@@ -107,7 +108,7 @@
         android:minHeight="48dp"
         android:textColorHint="#546E7A"
         android:autofillHints=""
-        android:inputType="number" />
+        android:inputType="numberDecimal" />
 
 
     <Button
@@ -115,8 +116,7 @@
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:text="@string/Accountsave"
-        android:layout_marginStart="250dp"
-        android:layout_marginEnd="20dp"
+        android:layout_marginStart="290dp"
         android:layout_marginTop="0dp"/>
 
     <!-- Delete Account Section -->
@@ -124,10 +124,12 @@
         android:id="@+id/buttonDeleteAccount"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_marginStart="220dp"
+        android:layout_marginStart="260dp"
         android:layout_marginTop="0dp"
-        android:layout_marginEnd="20dp"
+        android:layout_marginEnd="5dp"
         android:text="@string/delete_account" />
+
+
 
 
 

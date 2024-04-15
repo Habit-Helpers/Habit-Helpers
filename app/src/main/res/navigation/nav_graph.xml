@@ -132,10 +132,32 @@
         </fragment>
 
         <fragment
+            android:id="@+id/profileSettingsFragment"
+            android:name="com.example.habit_helper.ProfileSettingsFragment"
+            android:label="Profile Settings"
+            tools:layout="@layout/fragment_profile_settings" >
+
+        <action
+            android:id="@+id/action_profileSettingsFragment_to_settingsFragment"
+            app:destination="@id/settingsFragment" />
+
+
+        </fragment>
+
+
+        <!-- Add the SettingsFragment as a new destination -->
+        <fragment
             android:id="@+id/settingsFragment"
             android:name="com.example.habit_helper.SettingsFragment"
             android:label="Settings"
-            tools:layout="@layout/fragment_settings" />
+            tools:layout="@layout/fragment_settings" >
+
+        <!-- Connect SettingsFragment to ProfileSettingsFragment -->
+        <action
+            android:id="@+id/action_settingsFragment_to_profileSettingsFragment"
+            app:destination="@id/profileSettingsFragment" />
+
+        </fragment>
 
 
         <fragment

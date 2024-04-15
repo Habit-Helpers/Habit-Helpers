@@ -45,7 +45,7 @@
     <string name="Accountusername">Username</string>
     <string name="Accountemail">Email</string>
     <string name="Accountpassword">Password</string>
-    <string name="reset_password">Reset Password</string>
+    <string name="reset_password">Reset </string>
     <string name="health_stats">Health Stats</string>
     <string name="weight">Weight</string>
     <string name="height">Height</string>
@@ -72,5 +72,13 @@
     <string name="new_password">New Password:</string>
     <string name="enter_your_new_password">Enter your new password</string>
     <string name="reset_passwordb">Reset Password</string>
+    <string name="Profileusername">Username:</string>
+    <string name="Profileemail">Email</string>
+    <string name="Profilepassword">Password</string>
+    <string name="Profileweight">Weight</string>
+    <string name="Profileheight">Height</string>
+    <string name="Profilesave">Save</string>
+    <string name="profilesettings">profileSettings</string>
+    <string name="edit_profile">Edit Profile</string>
 
 </resources>
