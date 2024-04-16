@@ -58,7 +58,7 @@ class RemindersFragment : Fragment() {
     }
 
     private fun loadTasks() {
-        val tasks = databaseHelper.getAllTasks()
+        val tasks = databaseHelper.getAllTasks().reversed() // Reverse the order of tasks
         taskAdapter.updateTasks(tasks)
     }
 

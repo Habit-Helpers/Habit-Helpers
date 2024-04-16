@@ -11,6 +11,7 @@ import java.io.FileOutputStream
 
 class TasksDatabaseHelper(context: Context) : SQLiteOpenHelper(context, DATABASE_NAME, null, DATABASE_VERSION) {
 
+    // Companion object with constant values
     companion object {
         private const val DATABASE_VERSION = 1
         private const val DATABASE_NAME = "tasks_database.db"
@@ -21,16 +22,29 @@ class TasksDatabaseHelper(context: Context) : SQLiteOpenHelper(context, DATABASE
     }
 
     init {
-        if (!checkDatabaseExists(context)) {
+        // Check if the database exists and if the required table exists
+        if (!checkDatabaseExists(context) || !checkTableExists()) {
             copyDatabase(context)
         }
     }
 
+    // Function to check if the database file exists
     private fun checkDatabaseExists(context: Context): Boolean {
         val dbFile = context.getDatabasePath(DATABASE_NAME)
         return dbFile.exists()
     }
 
+    // Function to check if the required table exists
+    private fun checkTableExists(): Boolean {
+        val db = readableDatabase
+        val cursor = db.rawQuery("SELECT name FROM sqlite_master WHERE type='table' AND name='$TABLE_TASKS'", null)
+        val tableExists = cursor.moveToFirst()
+        cursor.close()
+        db.close()
+        return tableExists
+    }
+
+    // Function to copy the database file from assets
     private fun copyDatabase(context: Context) {
         try {
             context.assets.open(DATABASE_NAME).use { inputStream ->
@@ -44,11 +58,12 @@ class TasksDatabaseHelper(context: Context) : SQLiteOpenHelper(context, DATABASE
         }
     }
 
+    // onCreate method to create the database table
     override fun onCreate(db: SQLiteDatabase) {
         val createTableQuery = ("CREATE TABLE $TABLE_TASKS ("
                 + "$COLUMN_ID INTEGER PRIMARY KEY,"
                 + "$COLUMN_TASK_NAME TEXT,"
-                + "$COLUMN_TASK_DATE TEXT,"
+                + "$COLUMN_TASK_DATE TEXT"
                 + ")")
         try {
             db.execSQL(createTableQuery)
@@ -58,11 +73,13 @@ class TasksDatabaseHelper(context: Context) : SQLiteOpenHelper(context, DATABASE
         }
     }
 
+    // onUpgrade method to handle database upgrades
     override fun onUpgrade(db: SQLiteDatabase, oldVersion: Int, newVersion: Int) {
         db.execSQL("DROP TABLE IF EXISTS $TABLE_TASKS")
         onCreate(db)
     }
 
+    // Function to add a task to the database
     fun addTask(taskName: String, taskDate: String) {
         // Check if the task's name and date are not null or empty
         if (taskName.isEmpty() || taskDate.isEmpty()) {
@@ -84,7 +101,7 @@ class TasksDatabaseHelper(context: Context) : SQLiteOpenHelper(context, DATABASE
         val tasksList = mutableListOf<Task>()
         val selectQuery = "SELECT * FROM $TABLE_TASKS"
         val db = readableDatabase
-        var innerCursor: Cursor? = null
+        var innerCursor: Cursor? = null // Renamed to avoid shadowing
 
         try {
             innerCursor = db.rawQuery(selectQuery, null)
@@ -115,4 +132,5 @@ class TasksDatabaseHelper(context: Context) : SQLiteOpenHelper(context, DATABASE
         Log.d("TasksDatabaseHelper", "Retrieved tasks from database: $tasksList")
         return tasksList
     }
+
 }

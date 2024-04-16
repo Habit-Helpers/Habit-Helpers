@@ -4,6 +4,7 @@ import android.content.ContentValues
 import android.content.Context
 import android.database.sqlite.SQLiteDatabase
 import android.database.sqlite.SQLiteOpenHelper
+import android.util.Log
 
 class MyDBHelper(context: Context) : SQLiteOpenHelper(context, DATABASE_NAME, null, DATABASE_VERSION) {
 
@@ -115,13 +116,21 @@ class MyDBHelper(context: Context) : SQLiteOpenHelper(context, DATABASE_NAME, nu
                     val weight = it.getDouble(weightIndex)
                     val height = it.getDouble(heightIndex)
                     userData = UserData(username, userEmail, password, weight, height)
+
+                    // Logging user data
+                    Log.d("MyDBHelper", "User data retrieved: $userData")
+                } else {
+                    Log.e("MyDBHelper", "Column index out of bounds")
                 }
+            } else {
+                Log.e("MyDBHelper", "No user data found for email: $email")
             }
         }
         cursor.close()
         db.close()
         return userData
     }
+
 
 
     fun updateUserProfileData(email: String, username: String, password: String, weight: Double, height: Double): Boolean {

@@ -2,12 +2,14 @@ package com.example.habit_helper
 
 
 import android.os.Bundle
+import android.util.Log
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import android.widget.Button
 import android.widget.EditText
 import androidx.fragment.app.Fragment
+import androidx.navigation.fragment.findNavController
 
 class SettingsFragment : Fragment() {
 
@@ -24,6 +26,8 @@ class SettingsFragment : Fragment() {
         container: ViewGroup?,
         savedInstanceState: Bundle?
     ): View? {
+        Log.d("SettingsFragment", "onCreateView")
+
         val view = inflater.inflate(R.layout.fragment_settings, container, false)
 
         dbHelper = MyDBHelper(requireContext())
@@ -40,16 +44,22 @@ class SettingsFragment : Fragment() {
         val deleteAccountButton = view.findViewById<Button>(R.id.buttonDeleteAccount)
 
         resetPasswordButton.setOnClickListener {
+            Log.d("SettingsFragment", "Reset password button clicked")
+
             // Implement reset password functionality
             // This might include sending a password reset email to the user's email address
         }
 
         saveButton.setOnClickListener {
+            Log.d("SettingsFragment", "Save button clicked")
+
             // Implement save user data functionality
             saveUserData()
         }
 
         deleteAccountButton.setOnClickListener {
+            Log.d("SettingsFragment", "Delete account button clicked")
+
             // Implement account deletion functionality
             // This might include showing a confirmation dialog
             // and deleting the user's account from the database
@@ -59,14 +69,20 @@ class SettingsFragment : Fragment() {
     }
 
     private fun saveUserData() {
+        Log.d("SettingsFragment", "saveUserData")
+
         // Get data from EditText fields
         val username = usernameEditText.text.toString()
         val email = emailEditText.text.toString()
         val password = passwordEditText.text.toString()
-        val weight = weightEditText.text.toString().toDouble()
-        val height = heightEditText.text.toString().toDouble()
+        val weight = weightEditText.text.toString().toDoubleOrNull() ?: 0.0
+        val height = heightEditText.text.toString().toDoubleOrNull() ?: 0.0
+
+        Log.d("SettingsFragment", "Username: $username, Email: $email, Password: $password, Weight: $weight, Height: $height")
 
         // Update user data in the database
         dbHelper.updateUserProfileData(email, username, password, weight, height)
+
+        findNavController().navigateUp()
     }
 }

@@ -1,8 +1,8 @@
 package com.example.habit_helper
 
-
 import android.content.Context
 import android.os.Bundle
+import android.util.Log
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
@@ -22,12 +22,12 @@ class ProfileSettingsFragment : Fragment() {
     private lateinit var heightEditText: EditText
     private lateinit var editInfoButton: Button
 
-
     override fun onCreateView(
         inflater: LayoutInflater,
         container: ViewGroup?,
         savedInstanceState: Bundle?
     ): View? {
+        Log.d("ProfileSettingsFragment", "onCreateView")
         val view = inflater.inflate(R.layout.fragment_profile_settings, container, false)
 
         dbHelper = MyDBHelper(requireContext())
@@ -40,9 +40,10 @@ class ProfileSettingsFragment : Fragment() {
         heightEditText = view.findViewById(R.id.editTextProfileHeight)
         editInfoButton = view.findViewById(R.id.buttonEditProfile)
 
-
         // Retrieve user email from wherever it's stored in your app
         val userEmail = getUserEmail() // You need to implement this method
+        Log.d("ProfileSettingsFragment", "User email: $userEmail")
+
         // Retrieve user data from the database and populate the EditText fields
         val userData = dbHelper.getUserData(userEmail) // You need to implement this method in MyDBHelper
         userData?.let {
@@ -51,9 +52,12 @@ class ProfileSettingsFragment : Fragment() {
             passwordEditText.setText(it.password)
             weightEditText.setText(it.weight.toString())
             heightEditText.setText(it.height.toString())
+            Log.d("ProfileSettingsFragment", "User data retrieved: $it")
         }
 
+
         editInfoButton.setOnClickListener {
+            Log.d("ProfileSettingsFragment", "Edit info button clicked")
             // Navigate to the fragment where the user can edit their information
             findNavController().navigate(R.id.action_profileSettingsFragment_to_settingsFragment)
         }
@@ -66,5 +70,4 @@ class ProfileSettingsFragment : Fragment() {
         val sharedPreferences = requireContext().getSharedPreferences("user_prefs", Context.MODE_PRIVATE)
         return sharedPreferences.getString("user_email", "") ?: ""
     }
-
 }

@@ -194,14 +194,14 @@
         android:textColor="@color/black"
         android:textSize="25sp"
         android:textStyle="bold"
-        app:layout_constraintBottom_toTopOf="@+id/recyclerViewGoals"
+        app:layout_constraintBottom_toTopOf="@+id/recyclerViewUserGoals"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintHorizontal_bias="0.0"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/linearLayout5" />
 
     <androidx.recyclerview.widget.RecyclerView
-        android:id="@+id/recyclerViewGoals"
+        android:id="@+id/recyclerViewUserGoals"
         android:layout_width="337dp"
         android:layout_height="196dp"
         android:layout_marginStart="40dp"

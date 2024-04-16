@@ -1,40 +1,43 @@
 package com.example.habit_helper
 
-import android.util.Log
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import android.widget.TextView
 import androidx.recyclerview.widget.RecyclerView
 
-class ActivityAdapter(private var activityList: List<ActivityItem>) : RecyclerView.Adapter<ActivityAdapter.ViewHolder>() {
+class ActivityAdapter(private var activities: List<ActivityItem>) :
+    RecyclerView.Adapter<ActivityAdapter.ActivityViewHolder>() {
 
-    inner class ViewHolder(itemView: View) : RecyclerView.ViewHolder(itemView) {
-        val activityNameTextView: TextView = itemView.findViewById(R.id.activityNameTextView)
-        val activityDescriptionTextView: TextView = itemView.findViewById(R.id.activityDescriptionTextView)
-        val colorLabelTextView: TextView = itemView.findViewById(R.id.colorLabelTextView)
+    inner class ActivityViewHolder(itemView: View) : RecyclerView.ViewHolder(itemView) {
+        private val nameTextView: TextView = itemView.findViewById(R.id.activityNameTextView)
+        private val descriptionTextView: TextView = itemView.findViewById(R.id.activityDescriptionTextView)
+        private val colorLabelTextView: TextView = itemView.findViewById(R.id.colorLabelTextView)
+
+        fun bind(activity: ActivityItem) {
+            nameTextView.text = activity.name
+            descriptionTextView.text = activity.description
+            colorLabelTextView.text = activity.colorLabel
+        }
     }
 
-    override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): ViewHolder {
-        val view = LayoutInflater.from(parent.context).inflate(R.layout.item_activity, parent, false)
-        return ViewHolder(view)
+    override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): ActivityViewHolder {
+        val itemView = LayoutInflater.from(parent.context)
+            .inflate(R.layout.item_activity, parent, false)
+        return ActivityViewHolder(itemView)
     }
 
-    override fun onBindViewHolder(holder: ViewHolder, position: Int) {
-        val activity = activityList[position]
-        holder.activityNameTextView.text = activity.name
-        holder.activityDescriptionTextView.text = activity.description
-        holder.colorLabelTextView.text = activity.colorLabel
+    override fun onBindViewHolder(holder: ActivityViewHolder, position: Int) {
+        val activity = activities[position]
+        holder.bind(activity)
     }
 
     override fun getItemCount(): Int {
-        return activityList.size
+        return activities.size
     }
 
     fun updateActivities(newActivities: List<ActivityItem>) {
-        activityList = newActivities
-        Log.d("ActivityAdapter", "Activity list updated: $activityList")
-
+        activities = newActivities
         notifyDataSetChanged()
     }
 }

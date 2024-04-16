@@ -80,5 +80,6 @@
     <string name="Profilesave">Save</string>
     <string name="profilesettings">profileSettings</string>
     <string name="edit_profile">Edit Profile</string>
+    <string name="your_goals">Your Goals:</string>
 
 </resources>

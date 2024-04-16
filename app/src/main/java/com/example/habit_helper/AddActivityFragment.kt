@@ -10,7 +10,6 @@ import android.widget.Button
 import android.widget.EditText
 import android.widget.Spinner
 import androidx.fragment.app.Fragment
-import androidx.fragment.app.viewModels
 import androidx.navigation.fragment.findNavController
 
 class AddActivityFragment : Fragment() {
@@ -19,8 +18,6 @@ class AddActivityFragment : Fragment() {
     private lateinit var editTextDescription: EditText
     private lateinit var spinnerColorLabel: Spinner
     private lateinit var buttonSaveActivity: Button
-
-    private val viewModel: ActivityViewModel by viewModels()
 
     override fun onCreateView(
         inflater: LayoutInflater,
@@ -60,8 +57,10 @@ class AddActivityFragment : Fragment() {
         // Create an ActivityItem object with the user's input
         val newActivity = ActivityItem(activityName, activityDescription, selectedColor)
 
-        // Add the new activity to the ViewModel
-        viewModel.addActivity(newActivity)
+        // Add the new activity to the database
+        val dbHelper = ActivityDBHelper(requireContext())
+        dbHelper.addActivity(newActivity)
+
         Log.d("AddActivityFragment", "New activity saved: $newActivity")
 
         // Navigate back to the ActivitiesFragment
