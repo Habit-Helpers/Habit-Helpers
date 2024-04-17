@@ -63,6 +63,7 @@ dependencies {
     implementation("org.jetbrains.kotlinx:kotlinx-coroutines-android:1.6.4")
 
 
+    implementation ("com.github.lecho:hellocharts-library:1.5.8@aar")
 
 
 

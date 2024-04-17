@@ -22,7 +22,7 @@ class RecommendedChangesAdapter(private val recommendedChanges: List<String>) : 
     }
 
     inner class ViewHolder(itemView: View) : RecyclerView.ViewHolder(itemView) {
-        private val recommendedChangeTextView: TextView = itemView.findViewById(R.id.recommendedChangeTextView)
+        private val recommendedChangeTextView: TextView = itemView.findViewById(R.id.textViewRecommendation)
 
         fun bind(recommendedChange: String) {
             recommendedChangeTextView.text = recommendedChange
