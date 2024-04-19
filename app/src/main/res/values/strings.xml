@@ -81,5 +81,11 @@
     <string name="profilesettings">profileSettings</string>
     <string name="edit_profile">Edit Profile</string>
     <string name="your_goals">Your Goals:</string>
+    <string name="collapse">Collapse</string>
+    <string name="delete_button_description">Delete</string>
+    <string name="your_recomendations">Recommendations</string>
+    <string name="Activitycollapse">Collapse</string>
+    <string name="acollapse">Collapse</string>
+
 
 </resources>

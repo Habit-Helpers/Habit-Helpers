@@ -1,0 +1,27 @@
+<?xml version="1.0" encoding="utf-8"?>
+
+<!-- expanded_user_goals_layout.xml -->
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:orientation="vertical">
+
+    <Button
+        android:id="@+id/buttonCollapse"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="@string/collapse"
+        android:layout_marginStart="280dp"/>
+
+    <androidx.recyclerview.widget.RecyclerView
+        android:id="@+id/expandedRecyclerView"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:scrollbars="vertical"
+        android:paddingBottom="30dp"
+
+    />
+
+
+
+</LinearLayout>

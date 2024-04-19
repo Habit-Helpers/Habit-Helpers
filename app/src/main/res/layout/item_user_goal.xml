@@ -1,4 +1,5 @@
 <?xml version="1.0" encoding="utf-8"?>
+<!-- item_user_goal.xml -->
 <androidx.cardview.widget.CardView xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
     android:layout_width="match_parent"
@@ -10,30 +11,47 @@
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:orientation="vertical"
-        android:padding="16dp">
+        android:paddingStart="16dp"
+        android:paddingTop="16dp"
+        android:paddingEnd="16dp"
+        android:paddingBottom="8dp">
 
+        <!-- Goal name -->
         <TextView
             android:id="@+id/goalNameTextView"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
+            android:textColor="@color/black"
             android:textSize="16sp"
-            android:textStyle="bold"
-            android:textColor="@color/black" />
+            android:textStyle="bold" />
 
+        <!-- Goal description -->
         <TextView
             android:id="@+id/goalDescriptionTextView"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:layout_marginTop="8dp"
-            android:textSize="16sp"
-            android:textColor="@color/black" />
+            android:maxLines="3"
+            android:ellipsize="end"
+            android:textColor="@color/black"
+            android:textSize="16sp" />
 
+        <!-- Goal status -->
         <TextView
             android:id="@+id/goalStatusTextView"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:layout_marginTop="8dp"
-            android:textSize="14sp"
-            android:textColor="@color/green" />
+            android:textColor="@color/green"
+            android:textSize="14sp" />
+
+        <!-- Deletion button -->
+        <ImageButton
+            android:id="@+id/buttonDelete"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_gravity="end"
+            android:contentDescription="@string/delete_button_description"
+            android:src="@drawable/baseline_auto_delete_24" />
     </LinearLayout>
 </androidx.cardview.widget.CardView>

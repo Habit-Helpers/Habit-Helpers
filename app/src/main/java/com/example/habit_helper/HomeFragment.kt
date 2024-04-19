@@ -33,7 +33,7 @@ class HomeFragment : Fragment() {
 
         // Initialize the RecyclerView
         recyclerViewUserGoals = view.findViewById(R.id.recyclerViewUserGoals)
-        userGoalsAdapter = UserGoalsAdapter(emptyList())
+        userGoalsAdapter = UserGoalsAdapter(emptyList(),false)
         recyclerViewUserGoals.layoutManager = LinearLayoutManager(requireContext())
         recyclerViewUserGoals.adapter = userGoalsAdapter
 
@@ -76,17 +76,17 @@ class HomeFragment : Fragment() {
         Log.d("HomeFragment", "Navigating to ActivityFragment")
         // Use the Navigation component to navigate to the activity fragment
         findNavController().navigate(R.id.action_homeFragment_to_activityFragment)
-
-        findNavController().navigate(R.id.activitiesFragment)
     }
 
     private fun displayUserGoals() {
         Log.d("HomeFragment", "Fetching goals from database")
         // Retrieve the list of goals from the database
-        val goalsList = goalsDatabaseHelper.getAllGoals()
+        val goalsList = goalsDatabaseHelper.getAllGoals().toMutableList()
 
         // Update the adapter with the list of goals
         userGoalsAdapter.updateGoals(goalsList)
     }
+
+
 }
 

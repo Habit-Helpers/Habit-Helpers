@@ -1,5 +1,6 @@
 package com.example.habit_helper
 
+import android.annotation.SuppressLint
 import android.os.Bundle
 import android.util.Log
 import android.view.LayoutInflater
@@ -10,69 +11,57 @@ import androidx.fragment.app.Fragment
 import androidx.navigation.fragment.findNavController
 import androidx.recyclerview.widget.LinearLayoutManager
 import androidx.recyclerview.widget.RecyclerView
-/*
-import lecho.lib.hellocharts.model.Line
-import lecho.lib.hellocharts.model.LineChartData
-import lecho.lib.hellocharts.model.PointValue
-import lecho.lib.hellocharts.util.ChartUtils
-import lecho.lib.hellocharts.view.LineChartView
-
- */
 
 class InsightsFragment : Fragment() {
 
     private lateinit var userGoalsAdapter: UserGoalsAdapter
     private lateinit var dbHelper: GoalsDatabaseHelper
-    /*
-    private lateinit var chart: LineChartView
-     */
+    private lateinit var recyclerViewUserGoals: RecyclerView
 
+    @SuppressLint("InflateParams")
     override fun onCreateView(
         inflater: LayoutInflater, container: ViewGroup?,
         savedInstanceState: Bundle?
     ): View? {
         // Inflate the layout for this fragment
         val view = inflater.inflate(R.layout.fragment_insights, container, false)
+        Log.d(TAG, "Fragment view inflated")
 
-        // Initialize RecyclerView
+        // Initialize RecyclerView for recommended changes
         val recyclerViewRecommendedChanges = view.findViewById<RecyclerView>(R.id.recyclerViewRecommendedChanges)
-
-        // Sample data for recommended changes
         val recommendedChangesList = getRandomRecommendations()
-
-        // Set up recommended changes RecyclerView
         val recommendedChangesAdapter = RecommendedChangesAdapter(recommendedChangesList)
         recyclerViewRecommendedChanges.adapter = recommendedChangesAdapter
         recyclerViewRecommendedChanges.layoutManager = LinearLayoutManager(context, LinearLayoutManager.HORIZONTAL, false)
+        Log.d(TAG, "Recommended changes RecyclerView initialized")
 
-        // Initialize user goals RecyclerView and adapter
-        userGoalsAdapter = UserGoalsAdapter(emptyList())
+        // Initialize RecyclerView for user goals
+        recyclerViewUserGoals = view.findViewById(R.id.recyclerViewUserGoals)
+
+        // Initialize userGoalsAdapter
+        userGoalsAdapter = UserGoalsAdapter(mutableListOf(), true)
+
+        recyclerViewUserGoals.adapter = userGoalsAdapter
+        recyclerViewUserGoals.layoutManager = LinearLayoutManager(context)
+        Log.d(TAG, "User goals RecyclerView initialized")
 
         // Initialize dbHelper
         dbHelper = GoalsDatabaseHelper(requireContext())
+        Log.d(TAG, "Database helper initialized")
 
         // Fetch goals from the database and update the adapter
         val goals = dbHelper.getAllGoals()
-        val reversedGoals = goals.reversed()
-        userGoalsAdapter.updateGoals(reversedGoals)
-
-        /* Initialize chart
-        chart = view.findViewById(R.id.chart)
-        setupChart()
-        */
-        return view
-
-    }
-
-    override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
-        super.onViewCreated(view, savedInstanceState)
-        Log.d("InsightsFragment", "onCreate() method called")
+        userGoalsAdapter.updateGoals(goals)
+        Log.d(TAG, "Goals fetched from database")
 
         // Set a click listener on the add goal button
         view.findViewById<Button>(R.id.buttonAddGoal).setOnClickListener {
             // Navigate to the Add New Goals fragment
             findNavController().navigate(R.id.action_insightsFragment_to_addNewGoalFragment)
+            Log.d(TAG, "Add goal button clicked")
         }
+
+        return view
     }
 
     private fun getRandomRecommendations(): List<String> {
@@ -106,33 +95,11 @@ class InsightsFragment : Fragment() {
         // Return a sublist with a maximum of 3 recommendations
         return recommendedChanges.subList(0, minOf(recommendedChanges.size, 5))
     }
-    /*
-    private fun setupChart() {
-        val numPoints = 7 // Number of data points
-        val values = mutableListOf<PointValue>()
 
-        // Generate random values for the chart
-        for (i in 0 until numPoints) {
-            val value = (Math.random() * 100).toFloat() // Random value between 0 and 100
-            values.add(PointValue(i.toFloat(), value))
-        }
 
-        // Create a line and add data to it
-        val line = Line(values)
-            .setColor(ChartUtils.COLOR_GREEN)
-            .setHasPoints(true)
-            .setFilled(true)
-            .setHasLabels(true)
-
-        // Create a list containing only one line
-        val lines = mutableListOf<Line>()
-        lines.add(line)
-
-        // Create a LineChartData object with the lines
-        val data = LineChartData()
-        data.lines = lines
-
-        // Set the chart data
-        chart.lineChartData = data
-    }*/
+    companion object {
+        private const val TAG = "InsightsFragment"
+    }
 }
+
+

@@ -6,13 +6,22 @@ import android.view.ViewGroup
 import android.widget.TextView
 import androidx.recyclerview.widget.RecyclerView
 
-class ActivityAdapter(private var activities: List<ActivityItem>) :
-    RecyclerView.Adapter<ActivityAdapter.ActivityViewHolder>() {
+class ActivityAdapter(
+    private var activities: List<ActivityItem>,
+    private val onItemClick: () -> Unit // Click listener for items
+) : RecyclerView.Adapter<ActivityAdapter.ActivityViewHolder>() {
 
     inner class ActivityViewHolder(itemView: View) : RecyclerView.ViewHolder(itemView) {
         private val nameTextView: TextView = itemView.findViewById(R.id.activityNameTextView)
         private val descriptionTextView: TextView = itemView.findViewById(R.id.activityDescriptionTextView)
         private val colorLabelTextView: TextView = itemView.findViewById(R.id.colorLabelTextView)
+
+        init {
+            // Set click listener for the item
+            itemView.setOnClickListener {
+                onItemClick.invoke()
+            }
+        }
 
         fun bind(activity: ActivityItem) {
             nameTextView.text = activity.name
