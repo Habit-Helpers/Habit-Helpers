@@ -49,4 +49,12 @@ class ActivityAdapter(
         activities = newActivities
         notifyDataSetChanged()
     }
+
+    // Method to simulate item click
+    fun performItemClick() {
+        if (itemCount > 0) {
+            onItemClick.invoke()
+        }
+    }
 }
+

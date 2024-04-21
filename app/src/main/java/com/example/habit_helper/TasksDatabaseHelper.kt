@@ -87,6 +87,8 @@ class TasksDatabaseHelper(context: Context) : SQLiteOpenHelper(context, DATABASE
             return // Return without inserting if input is invalid
         }
 
+        Log.d("TasksDatabaseHelper", "Adding task - Name: $taskName, Date: $taskDate")
+
         val db = writableDatabase
         val values = ContentValues().apply {
             put(COLUMN_TASK_NAME, taskName)
@@ -96,6 +98,7 @@ class TasksDatabaseHelper(context: Context) : SQLiteOpenHelper(context, DATABASE
         db.insert(TABLE_TASKS, null, values)
         db.close()
     }
+
 
     fun getAllTasks(): List<Task> {
         val tasksList = mutableListOf<Task>()
@@ -132,5 +135,63 @@ class TasksDatabaseHelper(context: Context) : SQLiteOpenHelper(context, DATABASE
         Log.d("TasksDatabaseHelper", "Retrieved tasks from database: $tasksList")
         return tasksList
     }
+
+    fun getTasksForDate(selectedDate: String): List<Task> {
+        val tasksList = mutableListOf<Task>()
+        val selectQuery = "SELECT * FROM $TABLE_TASKS WHERE $COLUMN_TASK_DATE = ?"
+        val db = readableDatabase
+        var cursor: Cursor? = null
+
+        try {
+            cursor = db.rawQuery(selectQuery, arrayOf(selectedDate))
+
+            cursor?.use { innerCursor ->
+                val taskNameIndex = innerCursor.getColumnIndex(COLUMN_TASK_NAME)
+                val taskDateIndex = innerCursor.getColumnIndex(COLUMN_TASK_DATE)
+
+                while (innerCursor.moveToNext()) {
+                    val taskName = innerCursor.getString(taskNameIndex)
+                    val taskDate = innerCursor.getString(taskDateIndex)
+
+                    if (taskName != null && taskDate != null) {
+                        val task = Task(taskName, taskDate)
+                        tasksList.add(task)
+                    } else {
+                        Log.e("TasksDatabaseHelper", "One or more columns were null")
+                    }
+                }
+            }
+        } catch (e: Exception) {
+            Log.e("TasksDatabaseHelper", "Error fetching tasks for date: $selectedDate", e)
+        } finally {
+            cursor?.close()
+            db.close()
+        }
+
+        Log.d("TasksDatabaseHelper", "Retrieved tasks for date $selectedDate from database: $tasksList")
+        return tasksList
+    }
+
+    fun isTableEmpty(): Boolean {
+        val db = readableDatabase
+        var cursor: Cursor? = null
+
+        try {
+            cursor = db.rawQuery("SELECT COUNT(*) FROM $TABLE_TASKS", null)
+            if (cursor != null && cursor.moveToFirst()) {
+                val count = cursor.getInt(0)
+                return count == 0
+            }
+        } catch (e: Exception) {
+            Log.e("TasksDatabaseHelper", "Error checking if table is empty", e)
+        } finally {
+            cursor?.close()
+            db.close()
+        }
+
+        return true // Assume table is empty in case of an error
+    }
+
+
 
 }

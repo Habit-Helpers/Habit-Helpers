@@ -26,6 +26,8 @@ class TaskAdapter(private var tasks: List<Task>) : RecyclerView.Adapter<TaskAdap
         notifyDataSetChanged()
     }
 
+
+
     inner class ViewHolder(itemView: View) : RecyclerView.ViewHolder(itemView) {
 
         private val taskNameTextView: TextView = itemView.findViewById(R.id.reminderTextView)
@@ -37,3 +39,4 @@ class TaskAdapter(private var tasks: List<Task>) : RecyclerView.Adapter<TaskAdap
         }
     }
 }
+
