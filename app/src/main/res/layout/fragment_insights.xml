@@ -24,7 +24,9 @@
         <com.example.habit_helper.CustomBarChartView
             android:id="@+id/customChartView"
             android:layout_width="match_parent"
-            android:layout_height="200dp" /> <!-- Adjust height as needed -->
+            android:layout_height="220dp"
+            android:clickable="true"
+            android:focusable="true" /> <!-- Adjust height as needed -->
 
         <TextView
             android:layout_width="wrap_content"
@@ -32,7 +34,7 @@
             android:layout_marginTop="15dp"
             android:text="@string/your_recomendations"
             android:textStyle="bold"
-            android:layout_marginStart="20dp"
+            android:layout_marginStart="10dp"
             android:layout_marginEnd="40dp"
             android:textColor="@color/black" />
 
@@ -63,7 +65,7 @@
                 android:id="@+id/recyclerViewUserGoals"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:layout_marginTop="16dp"
+                android:layout_marginTop="10dp"
                 android:clipToPadding="false"
                 android:paddingBottom="20dp"
                 android:paddingHorizontal="16dp"

@@ -17,7 +17,7 @@ class InsightsFragment : Fragment() {
     private lateinit var userGoalsAdapter: UserGoalsAdapter
     private lateinit var dbHelper: GoalsDatabaseHelper
     private lateinit var recyclerViewUserGoals: RecyclerView
-    private lateinit var customBarChartView: CustomBarChartView // Change to CustomBarChartView
+    private lateinit var customBarChartView: CustomBarChartView
 
     companion object {
         private const val TAG = "InsightsFragment"
@@ -30,7 +30,7 @@ class InsightsFragment : Fragment() {
     ): View? {
         val view = inflater.inflate(R.layout.fragment_insights, container, false)
 
-        Log.d(TAG, "Initializing InsightsFragment")
+        Log.d(TAG, "onCreateView called")
 
         // Initialize RecyclerView for recommended changes
         val recyclerViewRecommendedChanges = view.findViewById<RecyclerView>(R.id.recyclerViewRecommendedChanges)
@@ -50,7 +50,7 @@ class InsightsFragment : Fragment() {
         Log.d(TAG, "RecyclerView for user goals initialized")
 
         // Initialize custom bar chart view
-        customBarChartView = view.findViewById(R.id.customChartView) // Change to customBarChartView
+        customBarChartView = view.findViewById(R.id.customChartView)
 
         Log.d(TAG, "Custom bar chart view initialized")
 
@@ -77,6 +77,16 @@ class InsightsFragment : Fragment() {
 
         Log.d(TAG, "Goal status data set to custom bar chart view")
 
+        // Set the onBarClickListener for the custom bar chart view
+        customBarChartView.setOnBarClickListener(object : CustomBarChartView.OnBarClickListener {
+            override fun onBarClicked(status: String) {
+                Log.d(TAG, "Bar clicked: $status")
+                // Filter the list of goals based on the clicked bar status
+                val filteredGoals = goals.filter { it.status == status }
+                userGoalsAdapter.updateGoals(filteredGoals)
+            }
+        })
+
         return view
     }
 
@@ -91,10 +101,10 @@ class InsightsFragment : Fragment() {
             goalStatusData[status] = count + 1
         }
 
-        Log.d(TAG, "Goal status data computed: $goalStatusData")
-
         // Pass the goal status data to the custom bar chart view
-        customBarChartView.setGoalStatusData(goalStatusData)
+        customBarChartView.setGoals(goals)
+
+        Log.d(TAG, "Goal status data computed and set to custom bar chart view")
     }
 
     private fun getRandomRecommendations(): List<String> {
@@ -128,7 +138,8 @@ class InsightsFragment : Fragment() {
         // Return a sublist with a maximum of 3 recommendations
         return recommendedChanges.subList(0, minOf(recommendedChanges.size, 5))
     }
-
 }
+
+
 
 
