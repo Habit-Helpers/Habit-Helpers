@@ -9,7 +9,7 @@
     <string name="username">Username</string>
     <string name="password">Password</string>
     <string name="login">Login</string>
-    <string name="welcome_back">Welcome Back!</string>
+    <string name="welcome_back">Welcome!</string>
     <string name="enter_your_credentials_to_login">Enter your credentials to login</string>
     <string name="Username">Username:</string>
     <string name="Password">Password:</string>
@@ -86,6 +86,7 @@
     <string name="your_recomendations">Recommendations</string>
     <string name="Activitycollapse">Collapse</string>
     <string name="acollapse">Collapse</string>
+    <string name="welcome">Welcome!</string>
 
 
 </resources>

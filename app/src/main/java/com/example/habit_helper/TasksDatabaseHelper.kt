@@ -19,6 +19,7 @@ class TasksDatabaseHelper(context: Context) : SQLiteOpenHelper(context, DATABASE
         private const val COLUMN_ID = "id"
         private const val COLUMN_TASK_NAME = "task_name"
         private const val COLUMN_TASK_DATE = "task_date"
+        private const val COLUMN_TASK_ADDED = "task_added"
     }
 
     init {
@@ -63,7 +64,8 @@ class TasksDatabaseHelper(context: Context) : SQLiteOpenHelper(context, DATABASE
         val createTableQuery = ("CREATE TABLE $TABLE_TASKS ("
                 + "$COLUMN_ID INTEGER PRIMARY KEY,"
                 + "$COLUMN_TASK_NAME TEXT,"
-                + "$COLUMN_TASK_DATE TEXT"
+                + "$COLUMN_TASK_DATE TEXT,"
+                + "$COLUMN_TASK_ADDED INTEGER DEFAULT 0"
                 + ")")
         try {
             db.execSQL(createTableQuery)
@@ -95,10 +97,31 @@ class TasksDatabaseHelper(context: Context) : SQLiteOpenHelper(context, DATABASE
             put(COLUMN_TASK_DATE, taskDate)
         }
 
+        // Insert the task into the database
         db.insert(TABLE_TASKS, null, values)
+
+        // Update the flag for the corresponding date to indicate that a task has been added
+        val updateValues = ContentValues().apply {
+            put(COLUMN_TASK_ADDED, 1) // Set the flag to 1 (true)
+        }
+        val whereClause = "$COLUMN_TASK_DATE = ?"
+        val whereArgs = arrayOf(taskDate)
+        db.update(TABLE_TASKS, updateValues, whereClause, whereArgs)
+
         db.close()
     }
 
+    // Function to update the task added flag for a specific date
+    fun updateTaskAddedFlag(date: String) {
+        val db = writableDatabase
+        val updateValues = ContentValues().apply {
+            put(COLUMN_TASK_ADDED, 1) // Set the flag to 1 (true)
+        }
+        val whereClause = "$COLUMN_TASK_DATE = ?"
+        val whereArgs = arrayOf(date)
+        db.update(TABLE_TASKS, updateValues, whereClause, whereArgs)
+        db.close()
+    }
 
     fun getAllTasks(): List<Task> {
         val tasksList = mutableListOf<Task>()
@@ -191,7 +214,5 @@ class TasksDatabaseHelper(context: Context) : SQLiteOpenHelper(context, DATABASE
 
         return true // Assume table is empty in case of an error
     }
-
-
-
 }
+

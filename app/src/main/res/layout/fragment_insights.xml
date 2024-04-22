@@ -19,10 +19,17 @@
             android:background="@color/green"
             app:title="Insights"
             android:paddingBottom="0dp" />
+
+        <!-- Custom Chart View -->
+        <com.example.habit_helper.CustomBarChartView
+            android:id="@+id/customChartView"
+            android:layout_width="match_parent"
+            android:layout_height="200dp" /> <!-- Adjust height as needed -->
+
         <TextView
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:layout_marginTop="215dp"
+            android:layout_marginTop="15dp"
             android:text="@string/your_recomendations"
             android:textStyle="bold"
             android:layout_marginStart="20dp"

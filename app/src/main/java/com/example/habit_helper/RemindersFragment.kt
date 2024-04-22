@@ -11,7 +11,6 @@ import androidx.fragment.app.Fragment
 import androidx.navigation.fragment.findNavController
 import androidx.recyclerview.widget.LinearLayoutManager
 import androidx.recyclerview.widget.RecyclerView
-import java.util.Locale
 
 class RemindersFragment : Fragment() {
 
@@ -39,18 +38,16 @@ class RemindersFragment : Fragment() {
         databaseHelper = TasksDatabaseHelper(requireContext())
 
         calendarView.setOnDateChangeListener { _, year, month, dayOfMonth ->
-            val selectedDate =
-                "$year-${month + 1}-$dayOfMonth".lowercase(Locale.ROOT) // or .toUpperCase() depending on your preference
+            val selectedDate = "$year-${month + 1}-$dayOfMonth"
             Log.d("RemindersFragment", "Selected date: $selectedDate")
 
             // Filter tasks by selected date
             val tasksForSelectedDate = databaseHelper.getTasksForDate(selectedDate)
             Log.d("RemindersFragment", "Tasks for selected date: $tasksForSelectedDate")
 
+            // Update UI to show tasks for the selected date
             taskAdapter.updateTasks(tasksForSelectedDate)
-            Log.d("RemindersFragment", "RecyclerView updated with tasks for selected date")
         }
-
 
         addNewButton.setOnClickListener {
             // Navigate to the AddTaskFragment when the button is clicked
@@ -82,5 +79,8 @@ class RemindersFragment : Fragment() {
     fun addTask(task: Task) {
         databaseHelper.addTask(task.name, task.date)
         loadTasks() // Reload tasks after adding a new task
+
+        // Here you can update any other UI or perform additional actions if needed
     }
 }
+
