@@ -1,6 +1,5 @@
 package com.example.habit_helper
 
-import android.annotation.SuppressLint
 import android.os.Bundle
 import android.util.Log
 import android.view.LayoutInflater
@@ -23,7 +22,6 @@ class InsightsFragment : Fragment() {
         private const val TAG = "InsightsFragment"
     }
 
-    @SuppressLint("InflateParams")
     override fun onCreateView(
         inflater: LayoutInflater, container: ViewGroup?,
         savedInstanceState: Bundle?
@@ -77,7 +75,6 @@ class InsightsFragment : Fragment() {
 
         Log.d(TAG, "Goal status data set to custom bar chart view")
 
-        // Set the onBarClickListener for the custom bar chart view
         customBarChartView.setOnBarClickListener(object : CustomBarChartView.OnBarClickListener {
             override fun onBarClicked(status: String) {
                 Log.d(TAG, "Bar clicked: $status")
@@ -86,6 +83,7 @@ class InsightsFragment : Fragment() {
                 userGoalsAdapter.updateGoals(filteredGoals)
             }
         })
+
 
         return view
     }

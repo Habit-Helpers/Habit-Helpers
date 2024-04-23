@@ -62,6 +62,7 @@ class CustomBarChartView(context: Context, attrs: AttributeSet?) : View(context,
         invalidate()
     }
 
+
     private fun calculateGoalStatusData() {
         goalStatusData.clear()
         goals.forEach { goal ->
@@ -90,7 +91,7 @@ class CustomBarChartView(context: Context, attrs: AttributeSet?) : View(context,
             val rectRight = startX + barWidth / 2
             val rectTop = height - padding * 2 - barHeight
             val rectBottom = height - padding * 2
-            canvas.drawRect(rectLeft, rectTop, rectRight, rectBottom, barPaints[status] ?: Paint())
+            canvas.drawRect(rectLeft, rectTop, rectRight, rectBottom, barPaints[status] ?: axisPaint)
 
             canvas.drawText(status, startX, rectTop - 20f, titlePaint)
             canvas.drawText(count.toString(), startX, rectBottom + 40f, textPaint)
@@ -132,21 +133,23 @@ class CustomBarChartView(context: Context, attrs: AttributeSet?) : View(context,
         }
     }
 
-
-
     override fun onTouchEvent(event: MotionEvent): Boolean {
         when (event.action) {
             MotionEvent.ACTION_DOWN -> {
                 val x = event.x
                 val y = event.y
 
-                startX = padding + barWidth
+                Log.d(TAG, "Touch coordinates: x=$x, y=$y")
+
+                startX = padding + barWidth / 2 // Adjusted to start from the center of the first bar
                 goalStatusData.forEach { (status, _) ->
                     endX = startX + barWidth
                     startY = height - padding * 2
                     endY = height.toFloat()
 
-                    if (x in startX..endX && y in startY..endY) {
+                    Log.d(TAG, "Bar $status coordinates: startX=$startX, endX=$endX, startY=$startY, endY=$endY")
+
+                    if (x in startX..endX && y >= startY && y <= endY) {
                         selectedStatus = status
                         invalidate()
                         onBarClickListener?.onBarClicked(status)
@@ -163,10 +166,14 @@ class CustomBarChartView(context: Context, attrs: AttributeSet?) : View(context,
         return super.onTouchEvent(event)
     }
 
-    interface OnBarClickListener {
-        fun onBarClicked(status: String)
 
+
+    interface OnBarClickListener {
+        fun onBarClicked(status: String) {
+            Log.d(TAG, "onBarClicked: $status")
+        }
     }
+
 
     override fun performClick(): Boolean {
         super.performClick()
@@ -179,6 +186,7 @@ class CustomBarChartView(context: Context, attrs: AttributeSet?) : View(context,
         Log.d("CustomBarChartView", message)
     }
 }
+
 
 
 
