@@ -1,6 +1,7 @@
 // CustomLineChartView.kt
 package com.example.habit_helper
 
+import android.annotation.SuppressLint
 import android.content.ContentValues.TAG
 import android.content.Context
 import android.graphics.Canvas
@@ -72,6 +73,7 @@ class CustomBarChartView(context: Context, attrs: AttributeSet?) : View(context,
         }
     }
 
+    @SuppressLint("DrawAllocation")
     override fun onDraw(canvas: Canvas) {
         super.onDraw(canvas)
 
